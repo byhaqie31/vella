@@ -130,13 +130,15 @@ Pre-launch, in active development under Axel Nova Ventures.
 
 - [x] design system, mockups for all four surfaces
 - [x] StoryPage contract, theme contract, motion spec
-- [ ] scaffold: tokens, types, registry
-- [ ] editorial theme + motion port
-- [ ] editor + media upload + autosave
-- [ ] landing, dashboard, auth
-- [ ] billing (Billplz FPX)
-- [ ] minimal theme
-- [ ] admin: moderation, payments
+- [x] scaffold: tokens, types, registry
+- [x] editorial theme + motion port
+- [x] minimal theme
+- [x] UI for every surface (landing, auth, dashboard, editor, billing, account, admin) on sample data
+- [ ] pages CRUD API + publish + slug check (Drizzle + MySQL, zod)
+- [ ] auth: magic link + Google, sessions
+- [ ] media upload flow (R2 presigned)
+- [ ] billing integration (Billplz FPX, webhooks)
+- [ ] admin on real data, behind Cloudflare Access
 
 ## License
 

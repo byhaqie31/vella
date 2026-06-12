@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Vella design tokens — exact values from the design handoff (§4).
+   Editorial / app (dark) + Minimal (light paper) + status colors.
+--------------------------------------------------------------------------- */
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  /* editorial / app (dark) */
+  --color-ink: oklch(0.168 0.018 265);
+  --color-ink-deep: oklch(0.13 0.018 265);
+  --color-ink-raised: oklch(0.205 0.018 265);
+  --color-ink-card: oklch(0.225 0.018 265);
+  --color-ink-field: oklch(0.235 0.018 265);
+  --color-line: oklch(0.3 0.02 265);
+  --color-line-soft: oklch(0.255 0.018 265);
+  --color-text: oklch(0.95 0.01 95);
+  --color-text-dim: oklch(0.74 0.015 270);
+  --color-text-faint: oklch(0.58 0.015 270);
+
+  /* status */
+  --color-positive: oklch(0.85 0.13 160);
+  --color-warning: oklch(0.84 0.13 80);
+  --color-danger: oklch(0.72 0.16 25);
+
+  /* minimal theme (light "paper") */
+  --color-paper: oklch(0.97 0.008 95);
+  --color-paper-line: oklch(0.85 0.01 95);
+  --color-paper-soft: oklch(0.88 0.01 95);
+  --color-paper-ink: oklch(0.22 0.012 265);
+  --color-paper-dim: oklch(0.42 0.012 265);
+  --color-paper-faint: oklch(0.52 0.012 265);
+
+  /* radii */
+  --radius-field: 9px;
+  --radius-card: 18px;
+}
+
+/* Accent preset — aurora by default; pages override --accent-a/--accent-b
+   inline when the user picks another preset. Gradient angle is always 105deg
+   for text, 120deg for fills (logo tile, primary action). */
+:root {
+  --accent-a: oklch(0.82 0.1 205);
+  --accent-b: oklch(0.74 0.13 300);
+}
+
+/* The accented display word — background-clip text gradient. */
+@utility text-gradient {
+  background: linear-gradient(105deg, var(--accent-a), var(--accent-b));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient fill for the logo tile and the one primary action per screen. */
+@utility bg-accent {
+  background: linear-gradient(120deg, var(--accent-a), var(--accent-b));
+}
+
+/* eyebrow / mono label role: IBM Plex Mono 0.74rem, tracking 0.16em */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+}
+
+/* striped media placeholder (dark) */
+@utility media-stripes {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-ink-card) 0 12px,
+    var(--color-ink-raised) 12px 24px
+  );
+}
+
+/* striped media placeholder (paper) */
+@utility media-stripes-paper {
+  background: repeating-linear-gradient(
+    45deg,
+    oklch(0.93 0.008 95) 0 12px,
+    oklch(0.9 0.008 95) 12px 24px
+  );
+}
+
+::selection {
+  background: oklch(0.74 0.13 300 / 0.4);
+}
+
+body {
+  font-family: var(--font-sans);
+}
