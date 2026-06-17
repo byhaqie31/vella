@@ -80,7 +80,7 @@ const cards = samplePages.map((p) => {
               class="flex-1 rounded-field border border-line py-[9px] text-center text-[0.86rem] font-medium text-text no-underline transition-colors hover:border-text-faint hover:bg-ink-card"
             >Edit</NuxtLink>
             <NuxtLink
-              :to="`/u/${pg.id}`"
+              :to="`/${pg.id}`"
               class="flex-1 rounded-field border border-line py-[9px] text-center text-[0.86rem] font-medium text-text no-underline transition-colors hover:border-text-faint hover:bg-ink-card"
             >View</NuxtLink>
           </div>

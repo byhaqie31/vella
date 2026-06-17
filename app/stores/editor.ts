@@ -3,6 +3,9 @@ import type { StoryPage } from '~/types/story'
 import { aliaStory, hurufStory } from '~/data/sample'
 
 const TAKEN_SLUGS = ['huruf', 'daniel-w', 'sofia-reads', 'admin', 'www']
+// Slugs live at the root (/[slug]), so they share the namespace with real
+// routes — a static route always wins, so these names can't be claimed.
+const RESERVED_SLUGS = ['admin', 'auth', 'dashboard', 'edit', 'www', 'api', 'u']
 
 export type SavedState = 'idle' | 'saving' | 'saved'
 export type SlugState = 'yours' | 'checking' | 'taken' | 'available' | 'empty'
@@ -72,7 +75,7 @@ export const useEditorStore = defineStore('editor', () => {
         ? 'empty'
         : clean === originalSlug.value
           ? 'yours'
-          : TAKEN_SLUGS.includes(clean)
+          : TAKEN_SLUGS.includes(clean) || RESERVED_SLUGS.includes(clean)
             ? 'taken'
             : 'available'
     }, 500)

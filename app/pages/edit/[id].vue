@@ -357,7 +357,7 @@ const fieldCls =
               >{{ d }}</button>
             </div>
             <NuxtLink
-              :to="`/u/${slug || store.pageId}`"
+              :to="`/${slug || store.pageId}`"
               class="font-mono text-[0.7rem] tracking-[0.1em] text-text-faint no-underline transition-colors hover:text-text"
             >open full page →</NuxtLink>
           </div>

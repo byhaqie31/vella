@@ -113,7 +113,7 @@ const plans = [
           class="bg-accent inline-flex items-center rounded-full px-7 py-3.5 text-[0.97rem] font-semibold text-ink no-underline shadow-[0_30px_80px_-30px_oklch(0_0_0/0.7)] transition-[filter] hover:brightness-110"
         >Start free</NuxtLink>
         <NuxtLink
-          to="/u/alia"
+          to="/alia"
           data-magnetic
           class="inline-flex items-center rounded-full border border-line px-6 py-3.5 text-[0.97rem] font-medium text-text no-underline transition-colors hover:border-text-faint"
         >See a live page</NuxtLink>
@@ -174,7 +174,7 @@ const plans = [
       <div class="grid gap-6" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))">
         <!-- editorial card -->
         <NuxtLink
-          to="/u/alia"
+          to="/alia"
           data-reveal="rise"
           class="flex flex-col overflow-hidden rounded-card border border-line-soft text-text no-underline transition-[border-color,transform] duration-250 hover:-translate-y-[3px] hover:border-line"
         >
@@ -197,7 +197,7 @@ const plans = [
 
         <!-- minimal card -->
         <NuxtLink
-          to="/u/huruf"
+          to="/huruf"
           data-reveal="rise"
           data-reveal-delay="0.12"
           class="flex flex-col overflow-hidden rounded-card border border-line-soft text-text no-underline transition-[border-color,transform] duration-250 hover:-translate-y-[3px] hover:border-line"

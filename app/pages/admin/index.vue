@@ -290,7 +290,7 @@ const PAY_TONE: Record<PayStatus, 'positive' | 'warning' | 'danger'> = {
             />
             <div class="flex gap-2">
               <NuxtLink
-                to="/u/alia"
+                to="/alia"
                 class="rounded-full border border-line px-4 py-[7px] text-[0.8rem] font-medium text-text no-underline transition-colors hover:border-text-faint"
               >Review</NuxtLink>
               <button
