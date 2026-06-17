@@ -6,12 +6,17 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ['gsap', 'gsap/ScrollTrigger', 'gsap/SplitText', '@vue/devtools-core', '@vue/devtools-kit'],
+    },
   },
   app: {
     head: {
       title: 'vella — a beautiful page about you',
       htmlAttrs: { lang: 'en' },
       link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {
