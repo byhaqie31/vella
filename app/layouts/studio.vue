@@ -8,6 +8,11 @@ const nav = [
 ]
 
 const isActive = (to: string) => route.path === to
+
+// Session clearing lands with the auth API — for now logout just returns to sign-in.
+async function logout() {
+  await navigateTo('/auth')
+}
 </script>
 
 <template>
@@ -25,15 +30,22 @@ const isActive = (to: string) => route.path === to
           :class="isActive(n.to) ? 'bg-ink-card font-medium text-text' : 'text-text-dim hover:bg-ink-raised hover:text-text'"
         >{{ n.label }}</NuxtLink>
       </nav>
-      <div class="mt-auto flex items-center gap-2.5 border-t border-line-soft px-2.5 pt-2.5 pb-1">
-        <div
-          class="h-7 w-7 shrink-0 rounded-full border border-line"
-          style="background: repeating-linear-gradient(45deg, oklch(0.225 0.018 265) 0 6px, oklch(0.255 0.018 265) 6px 12px)"
-        />
-        <div class="flex min-w-0 flex-col">
-          <span class="truncate text-[0.82rem] font-medium">Alia Rahman</span>
-          <span class="truncate font-mono text-[0.66rem] text-text-faint">free plan</span>
+      <div class="mt-auto flex flex-col gap-0.5 border-t border-line-soft pt-2.5">
+        <div class="flex items-center gap-2.5 px-2.5 pb-1.5">
+          <div
+            class="h-7 w-7 shrink-0 rounded-full border border-line"
+            style="background: repeating-linear-gradient(45deg, oklch(0.225 0.018 265) 0 6px, oklch(0.255 0.018 265) 6px 12px)"
+          />
+          <div class="flex min-w-0 flex-col">
+            <span class="truncate text-[0.82rem] font-medium">Alia Rahman</span>
+            <span class="truncate font-mono text-[0.66rem] text-text-faint">free plan</span>
+          </div>
         </div>
+        <button
+          type="button"
+          @click="logout"
+          class="rounded-field px-3 py-[9px] text-left text-[0.92rem] text-text-dim transition-colors hover:bg-ink-raised hover:text-text"
+        >Log out</button>
       </div>
     </aside>
 
