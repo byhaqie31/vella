@@ -18,7 +18,7 @@ story.design = normalizeDesign(story.design)
 const theme = THEMES[story.themeKey]
 
 useHead({
-  title: `${story.identity.name} — ${story.identity.headline.toLowerCase()}`,
+  title: `${story.identity.name} — ${story.identity.headline}`,
 })
 
 const rootRef = ref<HTMLElement | null>(null)

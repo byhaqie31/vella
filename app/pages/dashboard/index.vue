@@ -17,7 +17,7 @@ const cards = samplePages.map((p) => {
     views: p.story.isPublished ? p.views : '— views · 30d',
     updated: p.updated,
     themeLine: `${theme.key} · ${p.story.accent}`,
-    eyebrow: `${p.story.identity.name} · ${p.story.identity.role}`.toLowerCase(),
+    eyebrow: `${p.story.identity.name} · ${p.story.identity.role}`,
     title: p.story.identity.headline,
     preview: {
       background: dark ? 'var(--color-ink-deep)' : 'var(--color-paper)',
@@ -64,7 +64,7 @@ const cards = samplePages.map((p) => {
         <div class="flex flex-col gap-3 px-5 pt-4 pb-[18px]">
           <div class="flex items-center justify-between gap-3">
             <span class="text-[0.98rem] font-semibold">{{ pg.name }}</span>
-            <StatusPill :label="pg.published ? 'published' : 'draft'" :tone="pg.published ? 'positive' : 'warning'" />
+            <StatusPill :label="pg.published ? 'Published' : 'Draft'" :tone="pg.published ? 'positive' : 'warning'" />
           </div>
           <div class="flex items-center gap-3.5 font-mono text-[0.74rem] text-text-faint">
             <span>{{ pg.slug }}</span>
@@ -92,7 +92,7 @@ const cards = samplePages.map((p) => {
         class="flex min-h-[280px] flex-col items-center justify-center gap-2.5 rounded-card border border-dashed border-line text-text-faint no-underline transition-colors duration-250 hover:border-text-faint hover:text-text"
       >
         <span class="text-[1.6rem] leading-none font-normal">+</span>
-        <span class="font-mono text-[0.78rem] tracking-[0.12em]">new page</span>
+        <span class="font-mono text-[0.78rem] tracking-[0.12em]">New page</span>
       </NuxtLink>
     </div>
   </div>

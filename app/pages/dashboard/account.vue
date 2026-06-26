@@ -44,7 +44,7 @@ const fieldCls =
 
     <!-- profile -->
     <section class="flex flex-col gap-3.5">
-      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">profile</span>
+      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Profile</span>
       <div class="flex flex-col gap-3.5 rounded-card border border-line-soft bg-ink-raised px-[26px] py-6">
         <label class="flex flex-col gap-1.5">
           <span class="text-[0.8rem] text-text-dim">Name</span>
@@ -53,7 +53,7 @@ const fieldCls =
         <label class="flex flex-col gap-1.5">
           <span class="text-[0.8rem] text-text-dim">Email</span>
           <input v-model="email" :class="fieldCls" @input="saved = false">
-          <span class="font-mono text-[0.7rem] text-text-faint">changing email sends a confirmation link to the new address</span>
+          <span class="font-mono text-[0.7rem] text-text-faint">Changing email sends a confirmation link to the new address</span>
         </label>
         <div class="flex justify-end">
           <button
@@ -66,7 +66,7 @@ const fieldCls =
 
     <!-- sessions -->
     <section class="flex flex-col gap-3.5">
-      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">sessions</span>
+      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Sessions</span>
       <div class="overflow-hidden rounded-card border border-line-soft">
         <div
           v-for="ses in sessions"
@@ -77,7 +77,7 @@ const fieldCls =
             <span class="text-[0.9rem] font-medium">{{ ses.device }}</span>
             <span class="font-mono text-[0.72rem] text-text-faint">{{ ses.meta }}</span>
           </div>
-          <StatusPill v-if="ses.current" label="this device" tone="positive" />
+          <StatusPill v-if="ses.current" label="This device" tone="positive" />
           <button
             v-else
             class="cursor-pointer rounded-full border border-line bg-transparent px-3.5 py-1.5 font-sans text-[0.8rem] text-text-dim transition-colors hover:border-danger/50 hover:text-danger"
@@ -89,7 +89,7 @@ const fieldCls =
 
     <!-- danger zone -->
     <section class="flex flex-col gap-3.5">
-      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-danger">danger zone</span>
+      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-danger">Danger zone</span>
       <div class="flex flex-col gap-3.5 rounded-card border border-danger/35 bg-ink-raised px-[26px] py-6">
         <div class="flex flex-col gap-1">
           <span class="text-[0.95rem] font-medium">Delete account</span>
@@ -100,7 +100,7 @@ const fieldCls =
         <div class="flex items-center gap-2.5">
           <input
             v-model="confirmText"
-            placeholder='type "delete" to confirm'
+            placeholder='Type "delete" to confirm'
             class="min-w-0 flex-1 rounded-field border border-line bg-ink-field px-3 py-2.5 font-mono text-[0.8rem] text-text outline-none transition-colors focus:border-danger"
           >
           <button
@@ -110,7 +110,7 @@ const fieldCls =
             @click="canDelete && (deleted = true)"
           >Delete account</button>
         </div>
-        <span v-if="deleted" class="font-mono text-[0.74rem] text-danger">account scheduled for deletion. signing you out…</span>
+        <span v-if="deleted" class="font-mono text-[0.74rem] text-danger">Account scheduled for deletion. Signing you out…</span>
       </div>
     </section>
   </div>

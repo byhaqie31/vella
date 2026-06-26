@@ -2,9 +2,9 @@
 const route = useRoute()
 
 const nav = [
-  { label: 'pages', to: '/dashboard' },
-  { label: 'account', to: '/dashboard/account' },
-  { label: 'billing', to: '/dashboard/billing' },
+  { label: 'Pages', to: '/dashboard' },
+  { label: 'Account', to: '/dashboard/account' },
+  { label: 'Billing', to: '/dashboard/billing' },
 ]
 
 const isActive = (to: string) => route.path === to
@@ -38,7 +38,7 @@ async function logout() {
           />
           <div class="flex min-w-0 flex-col">
             <span class="truncate text-[0.82rem] font-medium">Alia Rahman</span>
-            <span class="truncate font-mono text-[0.66rem] text-text-faint">free plan</span>
+            <span class="truncate font-mono text-[0.66rem] text-text-faint">Free plan</span>
           </div>
         </div>
         <button

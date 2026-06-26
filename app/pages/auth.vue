@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useHead({ title: 'vella — sign in' })
+useHead({ title: 'vella — Sign in' })
 
 const mode = ref<'signup' | 'login'>('signup')
 const email = ref('')
@@ -55,7 +55,7 @@ function google() {
           </form>
           <div class="flex items-center gap-3">
             <span class="h-px flex-1 bg-line-soft" />
-            <span class="font-mono text-[0.68rem] tracking-[0.12em] text-text-faint">or</span>
+            <span class="font-mono text-[0.68rem] tracking-[0.12em] text-text-faint">Or</span>
             <span class="h-px flex-1 bg-line-soft" />
           </div>
           <button
@@ -66,7 +66,7 @@ function google() {
 
         <template v-else>
           <div class="flex flex-col gap-3 py-3 text-center">
-            <span class="eyebrow text-positive">link sent</span>
+            <span class="eyebrow text-positive">Link sent</span>
             <h1 class="m-0 font-display text-[1.7rem] font-normal leading-[1.15]">Check your email</h1>
             <p class="m-0 text-[0.92rem] leading-[1.55] text-text-dim">
               We sent a sign-in link to {{ email }}. It works once and expires in 15 minutes.
@@ -74,7 +74,7 @@ function google() {
             <button
               class="mt-2 cursor-pointer border-none bg-transparent font-mono text-[0.74rem] tracking-[0.1em] text-text-faint transition-colors hover:text-text"
               @click="sent = false"
-            >use a different email</button>
+            >Use a different email</button>
           </div>
         </template>
       </div>

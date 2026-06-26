@@ -38,15 +38,13 @@ function pay() {
   const until = new Date(now.setMonth(now.getMonth() + months))
   proUntil.value = until
     .toLocaleDateString('en-MY', { month: 'short', day: 'numeric', year: 'numeric' })
-    .toLowerCase()
   plan.value = 'pro'
   showUpgrade.value = false
   payments.value = [
     {
       what: `pro · ${months} ${months > 1 ? 'months' : 'month'}`,
       when: new Date()
-        .toLocaleDateString('en-MY', { month: 'short', day: 'numeric', year: 'numeric' })
-        .toLowerCase(),
+        .toLocaleDateString('en-MY', { month: 'short', day: 'numeric', year: 'numeric' }),
       amount: months === 12 ? 'RM190' : 'RM19',
       status: 'paid',
     },
@@ -64,7 +62,7 @@ function pay() {
 
     <!-- your plan -->
     <section class="flex flex-col gap-4">
-      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">your plan</span>
+      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Your plan</span>
       <div
         class="flex flex-col gap-[18px] rounded-card border bg-ink-raised px-7 py-[26px]"
         :style="{ borderColor: isPro ? 'oklch(0.82 0.10 205 / 0.4)' : 'var(--color-line-soft)' }"
@@ -75,7 +73,7 @@ function pay() {
             <span
               class="font-mono text-[0.78rem]"
               :class="isPro ? 'text-positive' : 'text-text-faint'"
-            >{{ isPro ? `pro until ${proUntil}` : 'your page is live with a small vella badge' }}</span>
+            >{{ isPro ? `Pro until ${proUntil}` : 'Your page is live with a small vella badge' }}</span>
           </div>
           <button
             v-if="!isPro"
@@ -98,7 +96,7 @@ function pay() {
             <span
               v-if="f.locked"
               class="ml-auto rounded-full border border-line px-[9px] py-0.5 font-mono text-[0.66rem] tracking-[0.08em] text-text-faint"
-            >pro</span>
+            >Pro</span>
           </div>
         </div>
       </div>
@@ -106,10 +104,10 @@ function pay() {
 
     <!-- payment history -->
     <section class="flex flex-col gap-4">
-      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">payment history</span>
+      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Payment history</span>
       <div class="overflow-hidden rounded-card border border-line-soft">
         <div class="grid grid-cols-[minmax(120px,1.2fr)_minmax(90px,1fr)_90px_90px] gap-3.5 border-b border-line-soft bg-ink-raised px-5 py-[11px]">
-          <span v-for="h in ['what', 'when', 'amount', 'status']" :key="h" class="font-mono text-[0.66rem] tracking-[0.14em] text-text-faint">{{ h }}</span>
+          <span v-for="h in ['What', 'When', 'Amount', 'Status']" :key="h" class="font-mono text-[0.66rem] tracking-[0.14em] text-text-faint">{{ h }}</span>
         </div>
         <div
           v-for="(p, i) in payments"
@@ -122,7 +120,7 @@ function pay() {
           <span class="justify-self-start"><StatusPill :label="p.status" :tone="STATUS_TONE[p.status]" /></span>
         </div>
       </div>
-      <p class="m-0 font-mono text-[0.72rem] text-text-faint">payments go through billplz fpx. refunds are handled by support within 7 days.</p>
+      <p class="m-0 font-mono text-[0.72rem] text-text-faint">Payments go through billplz fpx. Refunds are handled by support within 7 days.</p>
     </section>
 
     <!-- upgrade modal -->
@@ -161,7 +159,7 @@ function pay() {
           <button
             class="cursor-pointer border-none bg-transparent font-mono text-[0.72rem] tracking-[0.1em] text-text-faint transition-colors hover:text-text"
             @click="showUpgrade = false"
-          >not now</button>
+          >Not now</button>
         </div>
       </div>
     </Teleport>

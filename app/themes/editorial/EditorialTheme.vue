@@ -11,13 +11,12 @@ const headline = computed(() => splitHeadline(props.story.identity.headline))
 const eyebrow = computed(() =>
   [props.story.identity.name, props.story.identity.role, props.story.identity.location]
     .filter(Boolean)
-    .join(' · ')
-    .toLowerCase(),
+    .join(' · '),
 )
 
 /** A section renders only when it's visible and actually has content. Order
  *  follows the user's design.sections array. */
-const sectionLabels: Record<SectionId, string> = { about: 'about', chapters: 'chapters', gallery: 'gallery', links: 'links' }
+const sectionLabels: Record<SectionId, string> = { about: 'About', chapters: 'Chapters', gallery: 'Gallery', links: 'Links' }
 function hasContent(id: SectionId) {
   if (id === 'about') return !!(props.story.about.quote || props.story.about.body)
   if (id === 'chapters') return props.story.chapters.length > 0
@@ -100,7 +99,7 @@ const sectionPad = 'calc(clamp(80px, 12vh, 140px) * var(--vella-space))'
       class="fixed inset-x-0 top-0 z-40 flex items-center justify-between px-[clamp(24px,5vw,72px)] py-[22px] backdrop-blur-[6px]"
       style="background: linear-gradient(oklch(0.168 0.018 265 / 0.85), transparent)"
     >
-      <span class="eyebrow text-text-dim">{{ story.identity.name.toLowerCase() }}</span>
+      <span class="eyebrow text-text-dim">{{ story.identity.name }}</span>
       <div class="flex gap-[clamp(14px,2.5vw,34px)]">
         <a
           v-for="s in sections"
@@ -144,7 +143,7 @@ const sectionPad = 'calc(clamp(80px, 12vh, 140px) * var(--vella-space))'
       <section v-if="s.id === 'about'" id="about" class="relative z-[2] px-[clamp(24px,6vw,96px)]" :style="{ paddingBlock: sectionPad }">
         <div class="mx-auto flex max-w-[1180px] flex-col gap-10">
           <div class="flex flex-col gap-3">
-            <span data-reveal="fade" class="eyebrow text-text-faint">{{ sectionNumber('about') }} · about</span>
+            <span data-reveal="fade" class="eyebrow text-text-faint">{{ sectionNumber('about') }} · About</span>
             <div data-reveal="line" class="h-px bg-line" />
           </div>
           <div class="grid items-start gap-[clamp(32px,5vw,72px)] md:grid-cols-[minmax(0,1.6fr)_minmax(220px,1fr)]">
@@ -163,7 +162,7 @@ const sectionPad = 'calc(clamp(80px, 12vh, 140px) * var(--vella-space))'
             </div>
             <figure data-reveal="clip" class="relative m-0 aspect-[3/4] overflow-hidden rounded-card border border-line-soft">
               <div data-media class="media-stripes absolute inset-0 grid place-items-center">
-                <span class="eyebrow text-text-faint">portrait</span>
+                <span class="eyebrow text-text-faint">Portrait</span>
               </div>
             </figure>
           </div>
@@ -174,7 +173,7 @@ const sectionPad = 'calc(clamp(80px, 12vh, 140px) * var(--vella-space))'
       <section v-else-if="s.id === 'chapters'" id="chapters" class="relative z-[2] px-[clamp(24px,6vw,96px)]" :style="{ paddingBlock: sectionPad }">
         <div class="mx-auto flex max-w-[1180px] flex-col gap-10">
           <div class="flex flex-col gap-3">
-            <span data-reveal="fade" class="eyebrow text-text-faint">{{ sectionNumber('chapters') }} · chapters</span>
+            <span data-reveal="fade" class="eyebrow text-text-faint">{{ sectionNumber('chapters') }} · Chapters</span>
             <div data-reveal="line" class="h-px bg-line" />
           </div>
           <div class="flex flex-col">
@@ -198,7 +197,7 @@ const sectionPad = 'calc(clamp(80px, 12vh, 140px) * var(--vella-space))'
       <section v-else-if="s.id === 'gallery'" id="gallery" class="relative z-[2] px-[clamp(24px,6vw,96px)]" :style="{ paddingBlock: sectionPad }">
         <div class="mx-auto flex max-w-[1180px] flex-col gap-10">
           <div class="flex flex-col gap-3">
-            <span data-reveal="fade" class="eyebrow text-text-faint">{{ sectionNumber('gallery') }} · gallery</span>
+            <span data-reveal="fade" class="eyebrow text-text-faint">{{ sectionNumber('gallery') }} · Gallery</span>
             <div data-reveal="line" class="h-px bg-line" />
           </div>
           <div class="grid items-start gap-[clamp(20px,3vw,36px)]" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
@@ -224,7 +223,7 @@ const sectionPad = 'calc(clamp(80px, 12vh, 140px) * var(--vella-space))'
       <section v-else-if="s.id === 'links'" id="links" class="relative z-[2] px-[clamp(24px,6vw,96px)]" :style="{ paddingBlock: sectionPad }">
         <div class="mx-auto flex max-w-[1180px] flex-col gap-10">
           <div class="flex flex-col gap-3">
-            <span data-reveal="fade" class="eyebrow text-text-faint">{{ sectionNumber('links') }} · links</span>
+            <span data-reveal="fade" class="eyebrow text-text-faint">{{ sectionNumber('links') }} · Links</span>
             <div data-reveal="line" class="h-px bg-line" />
           </div>
           <div class="flex flex-col">
@@ -247,13 +246,13 @@ const sectionPad = 'calc(clamp(80px, 12vh, 140px) * var(--vella-space))'
     <!-- Footer -->
     <footer class="relative z-[2] px-[clamp(24px,6vw,96px)] pt-8 pb-12">
       <div class="mx-auto flex max-w-[1180px] items-center justify-between gap-4">
-        <span class="eyebrow text-text-faint">© 2026 {{ story.identity.name.toLowerCase() }}</span>
+        <span class="eyebrow text-text-faint">© 2026 {{ story.identity.name }}</span>
         <NuxtLink
           to="/"
           class="eyebrow inline-flex items-center gap-2 text-text-faint no-underline transition-colors duration-250 hover:text-text"
         >
           <span class="bg-accent h-2.5 w-2.5 rounded-[3px]" />
-          made with vella
+          Made with vella
         </NuxtLink>
       </div>
     </footer>

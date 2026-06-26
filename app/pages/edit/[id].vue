@@ -12,15 +12,15 @@ const { story, slug, savedState, slugState } = storeToRefs(store)
 
 const pageName = computed(() => story.value.identity.name || 'Untitled page')
 const savedLabel = computed(() =>
-  savedState.value === 'saving' ? 'saving…' : savedState.value === 'saved' ? 'saved' : '',
+  savedState.value === 'saving' ? 'Saving…' : savedState.value === 'saved' ? 'Saved' : '',
 )
 
 const SLUG_STATUS = {
-  yours: 'this is your current address',
-  checking: 'checking…',
-  taken: 'taken, try another',
-  available: 'available',
-  empty: 'pick an address',
+  yours: 'This is your current address',
+  checking: 'Checking…',
+  taken: 'Taken, try another',
+  available: 'Available',
+  empty: 'Pick an address',
 } as const
 const slugColor = computed(() =>
   slugState.value === 'taken'
@@ -79,7 +79,7 @@ const fieldCls =
       </div>
       <div class="flex items-center gap-3.5">
         <StatusPill
-          :label="story.isPublished ? 'published' : 'draft'"
+          :label="story.isPublished ? 'Published' : 'Draft'"
           :tone="story.isPublished ? 'positive' : 'warning'"
         />
         <button
@@ -111,7 +111,7 @@ const fieldCls =
           <button
             class="flex cursor-pointer items-center justify-between border-none bg-transparent p-0 font-mono text-[0.7rem] tracking-[0.16em] text-text-faint transition-colors hover:text-text"
             @click="open.identity = !open.identity"
-          ><span>01 · identity</span><span>{{ open.identity ? '–' : '+' }}</span></button>
+          ><span>01 · Identity</span><span>{{ open.identity ? '–' : '+' }}</span></button>
           <div v-if="open.identity" class="row-in flex flex-col gap-3.5">
             <label class="flex flex-col gap-1.5">
               <span class="text-[0.8rem] text-text-dim">Name</span>
@@ -155,7 +155,7 @@ const fieldCls =
           <button
             class="flex cursor-pointer items-center justify-between border-none bg-transparent p-0 font-mono text-[0.7rem] tracking-[0.16em] text-text-faint transition-colors hover:text-text"
             @click="open.about = !open.about"
-          ><span>02 · about</span><span>{{ open.about ? '–' : '+' }}</span></button>
+          ><span>02 · About</span><span>{{ open.about ? '–' : '+' }}</span></button>
           <div v-if="open.about" class="row-in flex flex-col gap-3.5">
             <label class="flex flex-col gap-1.5">
               <span class="text-[0.8rem] text-text-dim">Pull quote, the line that sums you up</span>
@@ -173,7 +173,7 @@ const fieldCls =
           <button
             class="flex cursor-pointer items-center justify-between border-none bg-transparent p-0 font-mono text-[0.7rem] tracking-[0.16em] text-text-faint transition-colors hover:text-text"
             @click="open.chapters = !open.chapters"
-          ><span>03 · chapters</span><span>{{ open.chapters ? '–' : '+' }}</span></button>
+          ><span>03 · Chapters</span><span>{{ open.chapters ? '–' : '+' }}</span></button>
           <template v-if="open.chapters">
             <div
               v-for="(ch, i) in story.chapters"
@@ -183,20 +183,20 @@ const fieldCls =
               <div class="grid grid-cols-[110px_minmax(0,1fr)_28px] items-center gap-2">
                 <input
                   v-model="ch.period"
-                  placeholder="period"
+                  placeholder="Period"
                   :class="fieldCls"
                   class="rounded-[7px] px-2.5 py-2 font-mono text-[0.78rem]"
                   @input="store.touch()"
                 >
                 <input
                   v-model="ch.title"
-                  placeholder="chapter title"
+                  placeholder="Chapter title"
                   :class="fieldCls"
                   class="rounded-[7px] px-2.5 py-2 text-[0.88rem]"
                   @input="store.touch()"
                 >
                 <button
-                  title="remove chapter"
+                  title="Remove chapter"
                   class="h-7 w-7 cursor-pointer rounded-[7px] border border-line bg-transparent text-[0.9rem] leading-none text-text-faint transition-colors hover:border-danger/50 hover:text-danger"
                   @click="store.removeChapter(i)"
                 >×</button>
@@ -204,7 +204,7 @@ const fieldCls =
               <textarea
                 v-model="ch.body"
                 rows="3"
-                placeholder="what happened"
+                placeholder="What happened"
                 :class="fieldCls"
                 class="resize-y rounded-[7px] px-2.5 py-2 text-[0.86rem] leading-[1.5]"
                 @input="store.touch()"
@@ -213,7 +213,7 @@ const fieldCls =
             <button
               class="cursor-pointer rounded-field border border-dashed border-line bg-transparent py-2.5 font-sans text-[0.86rem] text-text-dim transition-colors hover:border-text-faint hover:text-text"
               @click="store.addChapter()"
-            >+ add a chapter</button>
+            >+ Add a chapter</button>
           </template>
         </section>
 
@@ -222,14 +222,14 @@ const fieldCls =
           <button
             class="flex cursor-pointer items-center justify-between border-none bg-transparent p-0 font-mono text-[0.7rem] tracking-[0.16em] text-text-faint transition-colors hover:text-text"
             @click="open.media = !open.media"
-          ><span>04 · media</span><span>{{ open.media ? '–' : '+' }}</span></button>
+          ><span>04 · Media</span><span>{{ open.media ? '–' : '+' }}</span></button>
           <div v-if="open.media" class="row-in flex flex-col gap-3">
             <button
               class="flex cursor-pointer flex-col items-center gap-1.5 rounded-xl border border-dashed border-line bg-transparent py-[22px] font-sans text-text-dim transition-colors hover:border-text-faint hover:text-text"
               @click="store.addMedia()"
             >
-              <span class="text-[0.88rem] font-medium">drop images here, or browse</span>
-              <span class="font-mono text-[0.68rem] tracking-[0.08em] text-text-faint">resized on your device before upload</span>
+              <span class="text-[0.88rem] font-medium">Drop images here, or browse</span>
+              <span class="font-mono text-[0.68rem] tracking-[0.08em] text-text-faint">Resized on your device before upload</span>
             </button>
             <div class="grid gap-2.5" style="grid-template-columns: repeat(auto-fill, minmax(84px, 1fr))">
               <div
@@ -240,7 +240,7 @@ const fieldCls =
               >
                 <span class="absolute bottom-1.5 left-[7px] font-mono text-[0.6rem] tracking-[0.06em] text-text-dim">{{ m.slot }}</span>
                 <button
-                  title="remove image"
+                  title="Remove image"
                   class="absolute top-[5px] right-[5px] h-5 w-5 cursor-pointer rounded-md border-none bg-[oklch(0.168_0.018_265/0.8)] text-[0.75rem] leading-none text-text-dim transition-colors hover:text-danger"
                   @click="store.removeMedia(i)"
                 >×</button>
@@ -254,7 +254,7 @@ const fieldCls =
           <button
             class="flex cursor-pointer items-center justify-between border-none bg-transparent p-0 font-mono text-[0.7rem] tracking-[0.16em] text-text-faint transition-colors hover:text-text"
             @click="open.links = !open.links"
-          ><span>05 · links</span><span>{{ open.links ? '–' : '+' }}</span></button>
+          ><span>05 · Links</span><span>{{ open.links ? '–' : '+' }}</span></button>
           <template v-if="open.links">
             <div
               v-for="(l, i) in story.links"
@@ -263,7 +263,7 @@ const fieldCls =
             >
               <input
                 v-model="l.label"
-                placeholder="label"
+                placeholder="Label"
                 :class="fieldCls"
                 class="rounded-[7px] px-2.5 py-2 text-[0.86rem]"
                 @input="store.touch()"
@@ -276,7 +276,7 @@ const fieldCls =
                 @input="store.touch()"
               >
               <button
-                title="remove link"
+                title="Remove link"
                 class="h-7 w-7 cursor-pointer rounded-[7px] border border-line bg-transparent text-[0.9rem] leading-none text-text-faint transition-colors hover:border-danger/50 hover:text-danger"
                 @click="store.removeLink(i)"
               >×</button>
@@ -284,7 +284,7 @@ const fieldCls =
             <button
               class="cursor-pointer rounded-field border border-dashed border-line bg-transparent py-2.5 font-sans text-[0.86rem] text-text-dim transition-colors hover:border-text-faint hover:text-text"
               @click="store.addLink()"
-            >+ add a link</button>
+            >+ Add a link</button>
           </template>
         </section>
         </template>
@@ -295,12 +295,12 @@ const fieldCls =
       <section class="overflow-y-auto bg-ink-deep p-[clamp(20px,3vw,40px)]">
         <div class="mx-auto flex flex-col gap-3.5 transition-[max-width] duration-[350ms] ease-out" :style="{ maxWidth: previewWidth }">
           <div class="flex items-center justify-between gap-3">
-            <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">live preview</span>
+            <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Live preview</span>
             <div class="flex items-center gap-1.5">
               <button
                 v-for="d in (['desktop', 'mobile'] as const)"
                 :key="d"
-                class="cursor-pointer rounded-full border px-3 py-[5px] font-mono text-[0.66rem] tracking-[0.08em] text-text transition-colors"
+                class="cursor-pointer rounded-full border px-3 py-[5px] font-mono text-[0.66rem] tracking-[0.08em] text-text capitalize transition-colors"
                 :style="{
                   borderColor: device === d ? 'var(--color-text-faint)' : 'var(--color-line)',
                   background: device === d ? 'var(--color-ink-card)' : 'transparent',
@@ -311,7 +311,7 @@ const fieldCls =
             <NuxtLink
               :to="`/${slug || store.pageId}`"
               class="font-mono text-[0.7rem] tracking-[0.1em] text-text-faint no-underline transition-colors hover:text-text"
-            >open full page →</NuxtLink>
+            >Open full page →</NuxtLink>
           </div>
           <div class="flex flex-wrap items-center gap-1.5">
             <span

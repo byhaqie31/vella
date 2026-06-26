@@ -11,11 +11,10 @@ const headline = computed(() => splitHeadline(props.story.identity.headline))
 const eyebrow = computed(() =>
   [props.story.identity.name, props.story.identity.role, props.story.identity.location]
     .filter(Boolean)
-    .join(' · ')
-    .toLowerCase(),
+    .join(' · '),
 )
 
-const sectionLabels: Record<SectionId, string> = { about: 'about', chapters: 'chapters', gallery: 'gallery', links: 'links' }
+const sectionLabels: Record<SectionId, string> = { about: 'About', chapters: 'Chapters', gallery: 'Gallery', links: 'Links' }
 function hasContent(id: SectionId) {
   if (id === 'about') return !!(props.story.about.quote || props.story.about.body)
   if (id === 'chapters') return props.story.chapters.length > 0
@@ -100,7 +99,7 @@ const rootStyle = computed(() => ({
         <!-- About -->
         <section v-if="s.id === 'about'" class="flex flex-col gap-7">
           <div data-reveal="line" class="h-px bg-paper-line" />
-          <span data-reveal="fade" class="eyebrow text-paper-faint">about</span>
+          <span data-reveal="fade" class="eyebrow text-paper-faint">About</span>
           <p
             v-if="story.about.quote"
             data-reveal="rise"
@@ -117,7 +116,7 @@ const rootStyle = computed(() => ({
         <!-- Chapters -->
         <section v-else-if="s.id === 'chapters'" class="flex flex-col gap-7">
           <div data-reveal="line" class="h-px bg-paper-line" />
-          <span data-reveal="fade" class="eyebrow text-paper-faint">chapters</span>
+          <span data-reveal="fade" class="eyebrow text-paper-faint">Chapters</span>
           <div class="flex flex-col gap-9">
             <article v-for="ch in story.chapters" :key="ch.title + ch.period" data-reveal="rise" class="flex flex-col gap-2">
               <span data-reveal="slide" class="font-mono text-[0.8rem] text-paper-faint">{{ ch.period }}</span>
@@ -130,7 +129,7 @@ const rootStyle = computed(() => ({
         <!-- Gallery -->
         <section v-else-if="s.id === 'gallery'" class="flex flex-col gap-7">
           <div data-reveal="line" class="h-px bg-paper-line" />
-          <span data-reveal="fade" class="eyebrow text-paper-faint">gallery</span>
+          <span data-reveal="fade" class="eyebrow text-paper-faint">Gallery</span>
           <div class="grid gap-5" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))">
             <figure v-for="g in story.gallery" :key="g.slot" class="m-0 flex flex-col gap-2.5">
               <div data-reveal="clip" class="relative aspect-[4/3] overflow-hidden rounded-card border border-paper-soft">
@@ -146,7 +145,7 @@ const rootStyle = computed(() => ({
         <!-- Links -->
         <section v-else-if="s.id === 'links'" class="flex flex-col gap-7">
           <div data-reveal="line" class="h-px bg-paper-line" />
-          <span data-reveal="fade" class="eyebrow text-paper-faint">links</span>
+          <span data-reveal="fade" class="eyebrow text-paper-faint">Links</span>
           <div class="flex flex-col">
             <a
               v-for="l in story.links"
@@ -163,13 +162,13 @@ const rootStyle = computed(() => ({
       </template>
 
       <footer class="flex items-center justify-between gap-4 pt-2">
-        <span class="eyebrow text-paper-faint">© 2026 {{ story.identity.name.toLowerCase() }}</span>
+        <span class="eyebrow text-paper-faint">© 2026 {{ story.identity.name }}</span>
         <NuxtLink
           to="/"
           class="eyebrow inline-flex items-center gap-2 text-paper-faint no-underline transition-colors duration-200 hover:text-paper-ink"
         >
           <span class="bg-accent h-2.5 w-2.5 rounded-[3px]" />
-          made with vella
+          Made with vella
         </NuxtLink>
       </footer>
     </div>

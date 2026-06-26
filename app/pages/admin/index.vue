@@ -12,6 +12,13 @@ const VIEWS: Record<View, { title: string; sub: string }> = {
   payments: { title: 'Payments', sub: 'Webhook rows are the source of truth. Settlement reconciles payouts against them.' },
 }
 const navKeys = Object.keys(VIEWS) as View[]
+const NAV_LABEL: Record<View, string> = {
+  overview: 'Overview',
+  users: 'Users',
+  pages: 'Pages',
+  moderation: 'Moderation',
+  payments: 'Payments',
+}
 
 /* ---- overview: metrics count up on mount ---- */
 const statProgress = ref(0)
@@ -29,11 +36,11 @@ onBeforeUnmount(() => cancelAnimationFrame(raf))
 
 const cnt = (n: number) => Math.round(n * statProgress.value).toLocaleString()
 const metrics = computed(() => [
-  { label: 'users', value: cnt(2841), delta: '+118 this week', positive: true },
-  { label: 'published pages', value: cnt(903), delta: '+41 this week', positive: true },
-  { label: 'pro users', value: cnt(167), delta: '5.9% conversion', positive: true },
-  { label: 'mrr equivalent', value: `RM${cnt(2643)}`, delta: 'active pro value / months', positive: false },
-  { label: 'views 30d', value: `${cnt(482)}k`, delta: '+11% vs prior', positive: true },
+  { label: 'Users', value: cnt(2841), delta: '+118 this week', positive: true },
+  { label: 'Published pages', value: cnt(903), delta: '+41 this week', positive: true },
+  { label: 'Pro users', value: cnt(167), delta: '5.9% conversion', positive: true },
+  { label: 'MRR equivalent', value: `RM${cnt(2643)}`, delta: 'active pro value / months', positive: false },
+  { label: 'Views 30d', value: `${cnt(482)}k`, delta: '+11% vs prior', positive: true },
 ])
 
 const activity = [
@@ -80,11 +87,11 @@ function openDrawer(u: AdminUser) {
 const drawerFacts = computed(() =>
   drawerUser.value
     ? [
-        { k: 'plan', v: drawerUser.value.plan },
-        { k: 'pages', v: String(drawerUser.value.pages) },
-        { k: 'views 30d', v: drawerUser.value.views },
-        { k: 'payments', v: drawerUser.value.payments },
-        { k: 'joined', v: drawerUser.value.joined },
+        { k: 'Plan', v: drawerUser.value.plan },
+        { k: 'Pages', v: String(drawerUser.value.pages) },
+        { k: 'Views 30d', v: drawerUser.value.views },
+        { k: 'Payments', v: drawerUser.value.payments },
+        { k: 'Joined', v: drawerUser.value.joined },
       ]
     : [],
 )
@@ -101,6 +108,12 @@ const pagesData: { slug: string; owner: string; theme: string; status: PageStatu
 ]
 const pageFilter = ref<'all' | PageStatus>('all')
 const pageFilters = ['all', 'published', 'draft', 'taken down'] as const
+const PAGE_FILTER_LABEL: Record<(typeof pageFilters)[number], string> = {
+  all: 'All',
+  published: 'Published',
+  draft: 'Draft',
+  'taken down': 'Taken down',
+}
 const pageRows = computed(() =>
   pagesData.filter((r) => pageFilter.value === 'all' || r.status === pageFilter.value),
 )
@@ -156,7 +169,7 @@ const PAY_TONE: Record<PayStatus, 'positive' | 'warning' | 'danger'> = {
         <AppLogo :size="28" wordmark />
       </div>
       <span class="mx-2.5 mb-4 self-start rounded-full border border-warning/35 px-2.5 py-[3px] font-mono text-[0.64rem] tracking-[0.1em] text-warning">
-        admin · production
+        Admin · production
       </span>
       <nav class="flex flex-col gap-1">
         <button
@@ -165,11 +178,11 @@ const PAY_TONE: Record<PayStatus, 'positive' | 'warning' | 'danger'> = {
           class="flex cursor-pointer items-center gap-2.5 rounded-field border-none px-3 py-[9px] text-left font-sans text-[0.92rem] transition-colors"
           :class="view === k ? 'bg-ink-card font-medium text-text' : 'bg-transparent text-text-dim hover:bg-ink-raised hover:text-text'"
           @click="view = k; drawerUser = null"
-        >{{ k }}</button>
+        >{{ NAV_LABEL[k] }}</button>
       </nav>
       <div class="mt-auto flex flex-col gap-0.5 border-t border-line-soft px-2.5 pt-2.5 pb-1">
-        <span class="text-[0.82rem] font-medium">operator</span>
-        <span class="font-mono text-[0.66rem] text-text-faint">cloudflare access · role admin</span>
+        <span class="text-[0.82rem] font-medium">Operator</span>
+        <span class="font-mono text-[0.66rem] text-text-faint">Cloudflare access · role admin</span>
       </div>
     </aside>
 
@@ -214,12 +227,12 @@ const PAY_TONE: Record<PayStatus, 'positive' | 'warning' | 'danger'> = {
         <div v-else-if="view === 'users'" class="fade-in flex flex-col gap-4">
           <input
             v-model="userQuery"
-            placeholder="search email or name"
+            placeholder="Search email or name"
             class="w-[min(360px,100%)] rounded-field border border-line bg-ink-field px-3.5 py-2.5 font-mono text-[0.8rem] text-text outline-none transition-colors focus:border-[oklch(0.82_0.10_205)]"
           >
           <div class="overflow-hidden rounded-card border border-line-soft">
             <div class="grid grid-cols-[minmax(180px,1.6fr)_90px_70px_110px_90px] gap-3.5 border-b border-line-soft bg-ink-raised px-5 py-[11px]">
-              <span v-for="h in ['user', 'plan', 'pages', 'joined', '']" :key="h" class="font-mono text-[0.66rem] tracking-[0.14em] text-text-faint">{{ h }}</span>
+              <span v-for="h in ['User', 'Plan', 'Pages', 'Joined', '']" :key="h" class="font-mono text-[0.66rem] tracking-[0.14em] text-text-faint">{{ h }}</span>
             </div>
             <div
               v-for="u in users"
@@ -255,7 +268,7 @@ const PAY_TONE: Record<PayStatus, 'positive' | 'warning' | 'danger'> = {
                 background: pageFilter === f ? 'var(--color-ink-card)' : 'transparent',
               }"
               @click="pageFilter = f"
-            >{{ f }}</button>
+            >{{ PAGE_FILTER_LABEL[f] }}</button>
           </div>
           <div class="overflow-hidden rounded-card border border-line-soft">
             <div
@@ -306,7 +319,7 @@ const PAY_TONE: Record<PayStatus, 'positive' | 'warning' | 'danger'> = {
             </div>
           </div>
           <p class="m-0 font-mono text-[0.72rem] text-text-faint">
-            take down keeps all data and returns a neutral 410 on the public route. every action lands in the audit log with operator and reason.
+            Take down keeps all data and returns a neutral 410 on the public route. Every action lands in the audit log with operator and reason.
           </p>
         </div>
 
@@ -332,7 +345,7 @@ const PAY_TONE: Record<PayStatus, 'positive' | 'warning' | 'danger'> = {
           </div>
           <div class="overflow-hidden rounded-card border border-line-soft">
             <div class="grid grid-cols-[120px_minmax(160px,1.4fr)_80px_90px_110px] gap-3.5 border-b border-line-soft bg-ink-raised px-5 py-[11px]">
-              <span v-for="h in ['billplz id', 'user', 'amount', 'status', 'payout batch']" :key="h" class="font-mono text-[0.66rem] tracking-[0.14em] text-text-faint">{{ h }}</span>
+              <span v-for="h in ['Billplz id', 'User', 'Amount', 'Status', 'Payout batch']" :key="h" class="font-mono text-[0.66rem] tracking-[0.14em] text-text-faint">{{ h }}</span>
             </div>
             <div
               v-for="p in paymentRows"
@@ -347,7 +360,7 @@ const PAY_TONE: Record<PayStatus, 'positive' | 'warning' | 'danger'> = {
             </div>
           </div>
           <p class="m-0 font-mono text-[0.72rem] text-text-faint">
-            refunds: mark refunded here, adjust pro_until, execute the transfer in the billplz dashboard. no money moves from this screen.
+            Refunds: mark refunded here, adjust pro_until, execute the transfer in the billplz dashboard. No money moves from this screen.
           </p>
         </div>
       </div>
@@ -381,13 +394,13 @@ const PAY_TONE: Record<PayStatus, 'positive' | 'warning' | 'danger'> = {
             </div>
           </div>
           <div class="flex flex-col gap-2.5 border-t border-line-soft pt-4">
-            <span class="font-mono text-[0.68rem] tracking-[0.14em] text-text-faint">view user content</span>
+            <span class="font-mono text-[0.68rem] tracking-[0.14em] text-text-faint">View user content</span>
             <span class="text-[0.82rem] leading-[1.5] text-text-dim">
               Opening a user's pages requires a logged reason. This is operator tooling, not browsing.
             </span>
             <input
               v-model="reasonText"
-              placeholder="reason, e.g. report #182"
+              placeholder="Reason, e.g. report #182"
               class="rounded-field border border-line bg-ink-field px-3 py-[9px] font-mono text-[0.76rem] text-text outline-none transition-colors focus:border-[oklch(0.82_0.10_205)]"
             >
             <button
@@ -397,7 +410,7 @@ const PAY_TONE: Record<PayStatus, 'positive' | 'warning' | 'danger'> = {
               @click="reasonText.trim() && (contentOpened = true)"
             >Open pages, log reason</button>
             <span v-if="contentOpened" class="font-mono text-[0.7rem] text-positive">
-              logged to audit · operator, reason, timestamp
+              Logged to audit · operator, reason, timestamp
             </span>
           </div>
         </div>

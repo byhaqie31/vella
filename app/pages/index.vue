@@ -2,7 +2,7 @@
 import { THEMES } from '~/themes/registry'
 import { useMotion } from '~/themes/_motion/useMotion'
 
-useHead({ title: 'vella — a page that moves like you' })
+useHead({ title: 'vella — A page that moves like you' })
 
 const rootRef = ref<HTMLElement | null>(null)
 useMotion(rootRef, () => THEMES.editorial.motion)
@@ -81,9 +81,9 @@ const plans = [
     >
       <AppLogo :size="30" wordmark />
       <div class="flex items-center gap-6">
-        <a href="#themes" class="text-[0.92rem] text-text-dim no-underline transition-colors hover:text-text">themes</a>
-        <a href="#pricing" class="text-[0.92rem] text-text-dim no-underline transition-colors hover:text-text">pricing</a>
-        <NuxtLink to="/auth" class="text-[0.92rem] text-text-dim no-underline transition-colors hover:text-text">sign in</NuxtLink>
+        <a href="#themes" class="text-[0.92rem] text-text-dim no-underline transition-colors hover:text-text">Themes</a>
+        <a href="#pricing" class="text-[0.92rem] text-text-dim no-underline transition-colors hover:text-text">Pricing</a>
+        <NuxtLink to="/auth" class="text-[0.92rem] text-text-dim no-underline transition-colors hover:text-text">Sign in</NuxtLink>
         <NuxtLink
           to="/auth"
           class="inline-flex items-center rounded-full border border-line px-[18px] py-[9px] text-[0.88rem] font-medium text-text no-underline transition-colors hover:border-text-faint"
@@ -95,7 +95,7 @@ const plans = [
     <header
       class="relative z-2 mx-auto flex max-w-[1180px] flex-col items-center gap-7 px-[clamp(24px,5vw,72px)] pt-[clamp(64px,14vh,140px)] pb-[clamp(64px,10vh,120px)] text-center"
     >
-      <span data-load="0.15" data-motion="eyebrow" class="eyebrow text-text-faint">your story, beautifully told</span>
+      <span data-load="0.15" data-motion="eyebrow" class="eyebrow text-text-faint">Your story, beautifully told</span>
       <h1
         data-load="0.25"
         data-motion="split"
@@ -166,7 +166,7 @@ const plans = [
     <!-- themes -->
     <section id="themes" class="relative z-2 mx-auto flex max-w-[1180px] flex-col gap-9 px-[clamp(24px,5vw,72px)] pb-[clamp(80px,12vh,130px)]">
       <div class="flex flex-col gap-3">
-        <span data-reveal="fade" class="eyebrow text-text-faint">themes</span>
+        <span data-reveal="fade" class="eyebrow text-text-faint">Themes</span>
         <h2 data-reveal="rise" class="m-0 font-display text-[clamp(2rem,1.4rem+3vw,3.6rem)] font-normal leading-[1.05] tracking-[-0.01em]">
           Two voices, one story
         </h2>
@@ -191,7 +191,7 @@ const plans = [
           </div>
           <div class="flex items-baseline justify-between gap-3 bg-ink-raised px-6 py-[18px]">
             <span class="text-[1rem] font-semibold">Editorial</span>
-            <span class="font-mono text-[0.74rem] text-text-faint">dark · serif · expressive motion</span>
+            <span class="font-mono text-[0.74rem] text-text-faint">Dark · serif · expressive motion</span>
           </div>
         </NuxtLink>
 
@@ -214,7 +214,7 @@ const plans = [
           </div>
           <div class="flex items-baseline justify-between gap-3 bg-ink-raised px-6 py-[18px]">
             <span class="text-[1rem] font-semibold">Minimal</span>
-            <span class="font-mono text-[0.74rem] text-text-faint">light · sans · quiet motion</span>
+            <span class="font-mono text-[0.74rem] text-text-faint">Light · sans · quiet motion</span>
           </div>
         </NuxtLink>
       </div>
@@ -223,7 +223,7 @@ const plans = [
     <!-- pricing -->
     <section id="pricing" class="relative z-2 mx-auto flex max-w-[1180px] flex-col gap-9 px-[clamp(24px,5vw,72px)] pb-[clamp(80px,12vh,130px)]">
       <div class="flex flex-col gap-3">
-        <span data-reveal="fade" class="eyebrow text-text-faint">pricing</span>
+        <span data-reveal="fade" class="eyebrow text-text-faint">Pricing</span>
         <h2 data-reveal="rise" class="m-0 font-display text-[clamp(2rem,1.4rem+3vw,3.6rem)] font-normal leading-[1.05] tracking-[-0.01em]">
           Free to tell, pro to own
         </h2>
@@ -283,11 +283,11 @@ const plans = [
     <footer class="relative z-2 mx-auto flex max-w-[1180px] items-center justify-between gap-4 border-t border-line-soft px-[clamp(24px,5vw,72px)] pt-7 pb-11">
       <div class="flex flex-col gap-1.5">
         <span class="eyebrow text-text-faint">© 2026 vella</span>
-        <span class="eyebrow text-text-faint">made in kuala lumpur</span>
+        <span class="eyebrow text-text-faint">Made in Kuala Lumpur</span>
       </div>
       <div class="flex gap-6">
-        <a href="#" class="eyebrow text-text-faint no-underline transition-colors hover:text-text">privacy</a>
-        <a href="#" class="eyebrow text-text-faint no-underline transition-colors hover:text-text">terms</a>
+        <a href="#" class="eyebrow text-text-faint no-underline transition-colors hover:text-text">Privacy</a>
+        <a href="#" class="eyebrow text-text-faint no-underline transition-colors hover:text-text">Terms</a>
       </div>
     </footer>
   </div>

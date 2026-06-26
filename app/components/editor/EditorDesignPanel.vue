@@ -93,7 +93,7 @@ function lookActive(look: Look): boolean {
   <div class="flex flex-col gap-7">
     <!-- toolbar -->
     <div class="flex items-center justify-between">
-      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">design</span>
+      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Design</span>
       <div class="flex items-center gap-1">
         <button
           title="Undo (⌘Z)"
@@ -115,20 +115,20 @@ function lookActive(look: Look): boolean {
           title="Reset design"
           class="ml-1 rounded-[7px] border border-line bg-transparent px-2.5 py-[5px] font-mono text-[0.66rem] tracking-[0.08em] text-text-dim transition-colors hover:border-text-faint hover:text-text"
           @click="store.resetDesign()"
-        >reset</button>
+        >Reset</button>
       </div>
     </div>
 
     <!-- looks -->
     <section class="flex flex-col gap-3">
       <div class="flex items-center justify-between">
-        <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">looks</span>
+        <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Looks</span>
         <button
           class="flex items-center gap-1.5 rounded-full border border-line px-2.5 py-[5px] font-mono text-[0.66rem] tracking-[0.08em] text-text-dim transition-colors hover:border-text-faint hover:text-text"
           @click="store.shuffle()"
         >
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5" /><path d="M4 20 21 3" /><path d="M21 16v5h-5" /><path d="m15 15 6 6" /><path d="M4 4l5 5" /></svg>
-          shuffle
+          Shuffle
         </button>
       </div>
       <div class="grid grid-cols-3 gap-2">
@@ -166,7 +166,7 @@ function lookActive(look: Look): boolean {
 
     <!-- theme -->
     <section class="flex flex-col gap-3 border-t border-line-soft pt-6">
-      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">theme</span>
+      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Theme</span>
       <div class="grid grid-cols-2 gap-2.5">
         <button
           v-for="(t, k) in THEMES"
@@ -196,7 +196,7 @@ function lookActive(look: Look): boolean {
     <!-- accent -->
     <section class="flex flex-col gap-3 border-t border-line-soft pt-6">
       <div class="flex items-center justify-between">
-        <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">accent</span>
+        <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Accent</span>
         <span v-if="story.accent === 'custom'" class="font-mono text-[0.66rem] text-text-faint">{{ story.design.customHue }}°</span>
       </div>
       <div class="flex items-center gap-2.5">
@@ -212,7 +212,7 @@ function lookActive(look: Look): boolean {
           @click="store.setAccent(k)"
         />
         <button
-          title="custom hue"
+          title="Custom hue"
           class="grid h-9 w-9 cursor-pointer place-items-center rounded-full border-2 p-0 transition-transform hover:scale-105"
           style="background: conic-gradient(from 0deg, oklch(0.78 0.135 0), oklch(0.78 0.135 90), oklch(0.78 0.135 180), oklch(0.78 0.135 270), oklch(0.78 0.135 360))"
           :style="{ borderColor: story.accent === 'custom' ? 'var(--color-text)' : 'transparent' }"
@@ -234,14 +234,14 @@ function lookActive(look: Look): boolean {
         >
         <div class="flex items-center gap-2.5">
           <span class="h-7 flex-1 rounded-full" :style="{ background: fillCss }" />
-          <span class="font-mono text-[0.66rem] text-text-faint">any hue · always tasteful</span>
+          <span class="font-mono text-[0.66rem] text-text-faint">Any hue · always tasteful</span>
         </div>
       </div>
     </section>
 
     <!-- type -->
     <section class="flex flex-col gap-3.5 border-t border-line-soft pt-6">
-      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">type</span>
+      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Type</span>
       <div class="flex gap-2">
         <button
           v-for="m in moods"
@@ -304,7 +304,7 @@ function lookActive(look: Look): boolean {
 
     <!-- atmosphere -->
     <section class="flex flex-col gap-3 border-t border-line-soft pt-6">
-      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">atmosphere</span>
+      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Atmosphere</span>
       <div class="grid grid-cols-2 gap-2.5">
         <button
           v-for="a in atmosKeys"
@@ -334,7 +334,7 @@ function lookActive(look: Look): boolean {
 
     <!-- rhythm: density + shape -->
     <section class="flex flex-col gap-3.5 border-t border-line-soft pt-6">
-      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">rhythm</span>
+      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Rhythm</span>
       <div class="flex items-stretch gap-2">
         <button
           v-for="den in densities"
@@ -371,7 +371,7 @@ function lookActive(look: Look): boolean {
 
     <!-- motion -->
     <section class="flex flex-col gap-3 border-t border-line-soft pt-6">
-      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">motion</span>
+      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Motion</span>
       <div class="flex gap-2">
         <button
           v-for="mo in motions"
@@ -389,11 +389,11 @@ function lookActive(look: Look): boolean {
 
     <!-- sections -->
     <section class="flex flex-col gap-3 border-t border-line-soft pt-6">
-      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">sections · order &amp; visibility</span>
+      <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">Sections · order &amp; visibility</span>
       <div class="flex items-center gap-2.5 rounded-field border border-line-soft bg-ink-raised px-3 py-2 opacity-60">
         <span class="font-mono text-[0.66rem] tracking-[0.08em] text-text-faint">00</span>
         <span class="text-[0.86rem] font-medium text-text-dim">Identity</span>
-        <span class="ml-auto font-mono text-[0.62rem] text-text-faint">always first</span>
+        <span class="ml-auto font-mono text-[0.62rem] text-text-faint">Always first</span>
       </div>
       <ul class="flex flex-col gap-2">
         <li
@@ -407,7 +407,7 @@ function lookActive(look: Look): boolean {
           <div class="ml-auto flex items-center gap-1">
             <button
               :disabled="i === 0"
-              title="move up"
+              title="Move up"
               class="grid h-6 w-6 place-items-center rounded-[6px] text-text-faint transition-colors enabled:hover:bg-ink-field enabled:hover:text-text disabled:opacity-25"
               @click="store.moveSection(s.id, -1)"
             >
@@ -415,14 +415,14 @@ function lookActive(look: Look): boolean {
             </button>
             <button
               :disabled="i === story.design.sections.length - 1"
-              title="move down"
+              title="Move down"
               class="grid h-6 w-6 place-items-center rounded-[6px] text-text-faint transition-colors enabled:hover:bg-ink-field enabled:hover:text-text disabled:opacity-25"
               @click="store.moveSection(s.id, 1)"
             >
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
             </button>
             <button
-              :title="s.visible ? 'hide section' : 'show section'"
+              :title="s.visible ? 'Hide section' : 'Show section'"
               class="grid h-6 w-6 place-items-center rounded-[6px] transition-colors hover:bg-ink-field"
               :style="{ color: s.visible ? sel : 'var(--color-text-faint)' }"
               @click="store.toggleSection(s.id)"

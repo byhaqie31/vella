@@ -22,7 +22,7 @@ const pv = computed(() =>
 )
 
 const eyebrow = computed(() =>
-  [story.value.identity.name, story.value.identity.role, story.value.identity.location].filter(Boolean).join(' · ').toLowerCase(),
+  [story.value.identity.name, story.value.identity.role, story.value.identity.location].filter(Boolean).join(' · '),
 )
 const headline = computed(() => splitHeadline(story.value.identity.headline))
 
@@ -80,7 +80,7 @@ const rootStyle = computed(() => ({
     <div class="pv-stack relative flex flex-col px-[clamp(28px,5vw,60px)]">
       <!-- hero -->
       <header class="pv-hero flex flex-col">
-        <span class="font-mono text-[0.72rem] tracking-[0.16em]" :style="{ color: pv.faint }">{{ eyebrow || 'your name · role · place' }}</span>
+        <span class="font-mono text-[0.72rem] tracking-[0.16em]" :style="{ color: pv.faint }">{{ eyebrow || 'Your name · role · place' }}</span>
         <h2
           class="pv-headline m-0 max-w-[16ch] text-balance"
           :style="{ fontFamily: mood.font, fontWeight: mood.weight, letterSpacing: mood.tracking, color: pv.text }"
@@ -100,7 +100,7 @@ const rootStyle = computed(() => ({
         <!-- about -->
         <section v-if="s.id === 'about' && hasAbout" class="pv-section flex flex-col">
           <div class="pv-divider h-px" :style="{ background: pv.line }" />
-          <span class="pv-eyebrow font-mono text-[0.68rem] tracking-[0.16em]" :style="{ color: pv.faint }">about</span>
+          <span class="pv-eyebrow font-mono text-[0.68rem] tracking-[0.16em]" :style="{ color: pv.faint }">About</span>
           <blockquote v-if="story.about.quote" class="pv-quote m-0 max-w-[26ch]" :style="{ fontFamily: mood.font, color: pv.text }">{{ story.about.quote }}</blockquote>
           <p v-if="story.about.body" class="m-0 max-w-[34rem] text-[0.92rem] leading-[1.6] text-pretty" :style="{ color: pv.dim }">{{ story.about.body }}</p>
         </section>
@@ -108,7 +108,7 @@ const rootStyle = computed(() => ({
         <!-- chapters -->
         <section v-else-if="s.id === 'chapters' && chapters.length" class="pv-section flex flex-col">
           <div class="pv-divider h-px" :style="{ background: pv.line }" />
-          <span class="pv-eyebrow font-mono text-[0.68rem] tracking-[0.16em]" :style="{ color: pv.faint }">chapters</span>
+          <span class="pv-eyebrow font-mono text-[0.68rem] tracking-[0.16em]" :style="{ color: pv.faint }">Chapters</span>
           <div class="pv-rows flex flex-col">
             <div v-for="(ch, i) in chapters" :key="i" class="grid grid-cols-[96px_minmax(0,1fr)] gap-4">
               <span class="pt-1 font-mono text-[0.72rem]" :style="{ color: pv.faint }">{{ ch.period }}</span>
@@ -123,7 +123,7 @@ const rootStyle = computed(() => ({
         <!-- gallery -->
         <section v-else-if="s.id === 'gallery' && gallery.length" class="pv-section flex flex-col">
           <div class="pv-divider h-px" :style="{ background: pv.line }" />
-          <span class="pv-eyebrow font-mono text-[0.68rem] tracking-[0.16em]" :style="{ color: pv.faint }">gallery</span>
+          <span class="pv-eyebrow font-mono text-[0.68rem] tracking-[0.16em]" :style="{ color: pv.faint }">Gallery</span>
           <div class="grid gap-2.5" style="grid-template-columns: repeat(auto-fill, minmax(96px, 1fr))">
             <div
               v-for="(m, i) in gallery"
@@ -145,7 +145,7 @@ const rootStyle = computed(() => ({
         <!-- links -->
         <section v-else-if="s.id === 'links' && links.length" class="pv-section flex flex-col">
           <div class="pv-divider h-px" :style="{ background: pv.line }" />
-          <span class="pv-eyebrow font-mono text-[0.68rem] tracking-[0.16em]" :style="{ color: pv.faint }">links</span>
+          <span class="pv-eyebrow font-mono text-[0.68rem] tracking-[0.16em]" :style="{ color: pv.faint }">Links</span>
           <div class="flex flex-col">
             <div
               v-for="(l, i) in links"
