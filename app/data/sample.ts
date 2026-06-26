@@ -1,4 +1,11 @@
-import type { StoryPage } from '~/types/story'
+import type { SectionSetting, StoryPage } from '~/types/story'
+
+const allSections: SectionSetting[] = [
+  { id: 'about', visible: true },
+  { id: 'chapters', visible: true },
+  { id: 'gallery', visible: true },
+  { id: 'links', visible: true },
+]
 
 /** Sample content from the design handoff: Alia Rahman, a fictional
  *  independent type designer in Kuala Lumpur (Studio Huruf).
@@ -7,6 +14,16 @@ export const aliaStory: StoryPage = {
   themeKey: 'editorial',
   accent: 'aurora',
   typeMood: 'serif',
+  design: {
+    customHue: 265,
+    typeScale: 'balanced',
+    density: 'balanced',
+    shape: 'soft',
+    atmosphere: 'glow',
+    motionLevel: 'expressive',
+    headlineAccent: 'gradient',
+    sections: allSections.map((s) => ({ ...s })),
+  },
   identity: {
     name: 'Alia Rahman',
     role: 'type designer',
@@ -63,6 +80,16 @@ export const hurufStory: StoryPage = {
   themeKey: 'minimal',
   accent: 'jade',
   typeMood: 'sans',
+  design: {
+    customHue: 165,
+    typeScale: 'generous',
+    density: 'airy',
+    shape: 'soft',
+    atmosphere: 'clean',
+    motionLevel: 'calm',
+    headlineAccent: 'solid',
+    sections: allSections.map((s) => ({ ...s })),
+  },
   identity: {
     ...aliaStory.identity,
     name: 'Studio Huruf',

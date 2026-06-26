@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { samplePages } from '~/data/sample'
-import { THEMES } from '~/themes/registry'
+import { normalizeDesign, scaleMotion, THEMES } from '~/themes/registry'
 import { useMotion } from '~/themes/_motion/useMotion'
 
 const route = useRoute()
@@ -13,6 +13,8 @@ if (!record) {
 }
 
 const story = record.story
+// Backfill the design layer for any record that predates it.
+story.design = normalizeDesign(story.design)
 const theme = THEMES[story.themeKey]
 
 useHead({
@@ -20,7 +22,8 @@ useHead({
 })
 
 const rootRef = ref<HTMLElement | null>(null)
-useMotion(rootRef, () => theme.motion)
+// Motion amplitude follows the user's chosen temperament (calm/balanced/expressive).
+useMotion(rootRef, () => scaleMotion(theme.motion, story.design.motionLevel))
 </script>
 
 <template>

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useEditorStore } from '~/stores/editor'
-import { ACCENTS, THEMES, TYPE_MOODS } from '~/themes/registry'
-import type { AccentKey, ThemeKey, TypeMood } from '~/types/story'
 
 useHead({ title: 'vella — editor' })
 
@@ -34,21 +32,27 @@ const slugColor = computed(() =>
 
 /* collapsible form groups */
 const open = reactive({ identity: true, about: true, chapters: true, media: true, links: true })
-type GroupKey = keyof typeof open
 
-const groups: { key: GroupKey; label: string }[] = [
-  { key: 'identity', label: '01 · identity' },
-  { key: 'about', label: '02 · about' },
-  { key: 'chapters', label: '03 · chapters' },
-  { key: 'media', label: '04 · media' },
-  { key: 'links', label: '05 · links' },
-]
+/* the editor has two surfaces: write the story, then design it */
+const tab = ref<'content' | 'design'>('content')
 
-/* customization surface = exactly the whitelist: theme, accent, type mood */
-const themeKeys = Object.keys(THEMES) as ThemeKey[]
-const accentKeys = Object.keys(ACCENTS) as AccentKey[]
-const moodKeys = Object.keys(TYPE_MOODS) as TypeMood[]
-const SELECTED = 'oklch(0.82 0.10 205)'
+/* a compact read-out of the live design, shown above the preview */
+const designSummary = computed(() => {
+  const d = story.value.design
+  const acc = story.value.accent === 'custom' ? `hue ${d.customHue}°` : story.value.accent
+  return [story.value.themeKey, acc, story.value.typeMood, `${d.shape} corners`, `${d.density} rhythm`, `${d.motionLevel} motion`]
+})
+
+/* design undo/redo — only while the Design tab is active, so the Content tab's
+   inputs keep their native text undo. */
+function onKey(e: KeyboardEvent) {
+  if (tab.value !== 'design' || !(e.metaKey || e.ctrlKey) || e.key.toLowerCase() !== 'z') return
+  e.preventDefault()
+  if (e.shiftKey) store.redo()
+  else store.undo()
+}
+onMounted(() => window.addEventListener('keydown', onKey))
+onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
 /* device (responsive) preview toggle */
 const device = ref<'desktop' | 'mobile'>('desktop')
@@ -87,75 +91,21 @@ const fieldCls =
 
     <div class="grid min-h-0 flex-1 grid-cols-[minmax(340px,420px)_minmax(0,1fr)]">
       <!-- form column -->
-      <aside class="flex flex-col gap-8 overflow-y-auto border-r border-line-soft px-[clamp(20px,2.5vw,32px)] pt-7 pb-16">
-        <!-- theme -->
-        <section class="flex flex-col gap-3">
-          <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">theme</span>
-          <div class="grid grid-cols-2 gap-2.5">
-            <button
-              v-for="k in themeKeys"
-              :key="k"
-              class="flex cursor-pointer flex-col gap-2 rounded-xl border bg-ink-raised p-3 text-left font-sans transition-colors"
-              :style="{ borderColor: story.themeKey === k ? SELECTED : 'var(--color-line)' }"
-              @click="story.themeKey = k; store.touch()"
-            >
-              <span
-                class="relative block h-11 overflow-hidden rounded-[7px]"
-                :style="{ background: THEMES[k].dark ? 'var(--color-ink)' : 'var(--color-paper)' }"
-              >
-                <span
-                  class="absolute top-[9px] left-2.5 text-[0.95rem] tracking-[-0.02em]"
-                  :style="{
-                    fontFamily: TYPE_MOODS[THEMES[k].defaultMood].font,
-                    fontWeight: TYPE_MOODS[THEMES[k].defaultMood].weight,
-                    color: THEMES[k].dark ? 'var(--color-text)' : 'var(--color-paper-ink)',
-                  }"
-                >Aa</span>
-                <span
-                  class="absolute bottom-2 left-2.5 right-2.5 h-px"
-                  :style="{ background: THEMES[k].dark ? 'var(--color-line)' : 'var(--color-paper-line)' }"
-                />
-              </span>
-              <span class="text-[0.84rem] font-medium text-text">{{ THEMES[k].label }}</span>
-            </button>
-          </div>
-        </section>
+      <aside class="flex min-h-0 flex-col overflow-y-auto border-r border-line-soft">
+        <!-- write / design tabs -->
+        <div class="sticky top-0 z-10 flex gap-1 border-b border-line-soft bg-ink/92 px-[clamp(20px,2.5vw,32px)] py-2.5 backdrop-blur-md">
+          <button
+            v-for="t in (['content', 'design'] as const)"
+            :key="t"
+            class="flex-1 cursor-pointer rounded-field border py-2 text-[0.84rem] font-medium capitalize transition-colors"
+            :class="tab === t ? 'border-line bg-ink-card text-text' : 'border-transparent bg-transparent text-text-dim hover:text-text'"
+            @click="tab = t"
+          >{{ t === 'content' ? 'Write' : 'Design' }}</button>
+        </div>
 
-        <!-- accent -->
-        <section class="flex flex-col gap-3">
-          <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">accent</span>
-          <div class="flex gap-2.5">
-            <button
-              v-for="k in accentKeys"
-              :key="k"
-              :title="k"
-              class="h-10 w-10 cursor-pointer rounded-full border-2 p-0 transition-colors"
-              :style="{
-                background: `linear-gradient(120deg, ${ACCENTS[k].onDark[0]}, ${ACCENTS[k].onDark[1]})`,
-                borderColor: story.accent === k ? 'var(--color-text)' : 'transparent',
-              }"
-              @click="story.accent = k; store.touch()"
-            />
-          </div>
-        </section>
-
-        <!-- type mood -->
-        <section class="flex flex-col gap-3">
-          <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">type mood</span>
-          <div class="flex gap-2">
-            <button
-              v-for="k in moodKeys"
-              :key="k"
-              class="flex-1 cursor-pointer rounded-field border py-[9px] font-sans text-[0.84rem] font-medium text-text transition-colors"
-              :style="{
-                background: story.typeMood === k ? 'var(--color-ink-field)' : 'transparent',
-                borderColor: story.typeMood === k ? SELECTED : 'var(--color-line)',
-              }"
-              @click="story.typeMood = k; store.touch()"
-            >{{ k }}</button>
-          </div>
-        </section>
-
+        <div class="flex flex-col gap-8 px-[clamp(20px,2.5vw,32px)] pt-6 pb-16">
+        <EditorDesignPanel v-if="tab === 'design'" />
+        <template v-else>
         <!-- 01 identity -->
         <section class="flex flex-col gap-3.5 border-t border-line-soft pt-[22px]">
           <button
@@ -337,13 +287,15 @@ const fieldCls =
             >+ add a link</button>
           </template>
         </section>
+        </template>
+        </div>
       </aside>
 
       <!-- live preview -->
       <section class="overflow-y-auto bg-ink-deep p-[clamp(20px,3vw,40px)]">
         <div class="mx-auto flex flex-col gap-3.5 transition-[max-width] duration-[350ms] ease-out" :style="{ maxWidth: previewWidth }">
           <div class="flex items-center justify-between gap-3">
-            <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">live preview · {{ story.themeKey }}</span>
+            <span class="font-mono text-[0.7rem] tracking-[0.16em] text-text-faint">live preview</span>
             <div class="flex items-center gap-1.5">
               <button
                 v-for="d in (['desktop', 'mobile'] as const)"
@@ -360,6 +312,13 @@ const fieldCls =
               :to="`/${slug || store.pageId}`"
               class="font-mono text-[0.7rem] tracking-[0.1em] text-text-faint no-underline transition-colors hover:text-text"
             >open full page →</NuxtLink>
+          </div>
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span
+              v-for="(chip, i) in designSummary"
+              :key="i"
+              class="rounded-full border border-line-soft bg-ink-raised px-2.5 py-1 font-mono text-[0.62rem] tracking-[0.04em] text-text-dim"
+            >{{ chip }}</span>
           </div>
           <EditorPreview />
         </div>

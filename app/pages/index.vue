@@ -60,7 +60,7 @@ const plans = [
         data-motion="glow"
         data-opacity="0.45"
         data-drift
-        class="absolute -top-[22%] -right-[10%] h-[58vw] w-[58vw] rounded-full blur-[40px]"
+        class="absolute -top-[22%] -right-[10%] h-[58vw] w-[58vw] rounded-full blur-2xl"
         style="background: radial-gradient(circle, oklch(0.74 0.13 300 / 0.13), transparent 65%)"
       />
       <div
@@ -68,7 +68,7 @@ const plans = [
         data-motion="glow"
         data-opacity="0.45"
         data-drift
-        class="absolute -bottom-[28%] -left-[12%] h-[52vw] w-[52vw] rounded-full blur-[40px]"
+        class="absolute -bottom-[28%] -left-[12%] h-[52vw] w-[52vw] rounded-full blur-2xl"
         style="background: radial-gradient(circle, oklch(0.82 0.10 205 / 0.12), transparent 65%)"
       />
     </div>
@@ -93,7 +93,7 @@ const plans = [
 
     <!-- hero -->
     <header
-      class="relative z-[2] mx-auto flex max-w-[1180px] flex-col items-center gap-7 px-[clamp(24px,5vw,72px)] pt-[clamp(64px,14vh,140px)] pb-[clamp(64px,10vh,120px)] text-center"
+      class="relative z-2 mx-auto flex max-w-[1180px] flex-col items-center gap-7 px-[clamp(24px,5vw,72px)] pt-[clamp(64px,14vh,140px)] pb-[clamp(64px,10vh,120px)] text-center"
     >
       <span data-load="0.15" data-motion="eyebrow" class="eyebrow text-text-faint">your story, beautifully told</span>
       <h1
@@ -120,7 +120,7 @@ const plans = [
       </div>
 
       <!-- preview card -->
-      <div data-load="1.0" data-motion="rise" class="flex w-full justify-center pt-[clamp(28px,5vh,56px)] [perspective:1200px]">
+      <div data-load="1.0" data-motion="rise" class="flex w-full justify-center pt-[clamp(28px,5vh,56px)] perspective-distant">
         <div
           class="w-[min(680px,94%)] overflow-hidden rounded-card border border-line-soft bg-ink-deep text-left shadow-[0_30px_80px_-30px_oklch(0_0_0/0.7)]"
           style="transform: rotateX(6deg) rotate(-1.5deg)"
@@ -152,7 +152,7 @@ const plans = [
     </header>
 
     <!-- how it works -->
-    <section class="relative z-[2] mx-auto max-w-[1180px] px-[clamp(24px,5vw,72px)] pb-[clamp(80px,12vh,130px)]">
+    <section class="relative z-2 mx-auto max-w-[1180px] px-[clamp(24px,5vw,72px)] pb-[clamp(80px,12vh,130px)]">
       <div data-reveal="line" class="mb-12 h-px bg-line-soft" />
       <div class="grid gap-[clamp(24px,4vw,56px)]" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))">
         <div v-for="st in steps" :key="st.num" data-reveal="rise" class="flex flex-col gap-3">
@@ -164,7 +164,7 @@ const plans = [
     </section>
 
     <!-- themes -->
-    <section id="themes" class="relative z-[2] mx-auto flex max-w-[1180px] flex-col gap-9 px-[clamp(24px,5vw,72px)] pb-[clamp(80px,12vh,130px)]">
+    <section id="themes" class="relative z-2 mx-auto flex max-w-[1180px] flex-col gap-9 px-[clamp(24px,5vw,72px)] pb-[clamp(80px,12vh,130px)]">
       <div class="flex flex-col gap-3">
         <span data-reveal="fade" class="eyebrow text-text-faint">themes</span>
         <h2 data-reveal="rise" class="m-0 font-display text-[clamp(2rem,1.4rem+3vw,3.6rem)] font-normal leading-[1.05] tracking-[-0.01em]">
@@ -221,7 +221,7 @@ const plans = [
     </section>
 
     <!-- pricing -->
-    <section id="pricing" class="relative z-[2] mx-auto flex max-w-[1180px] flex-col gap-9 px-[clamp(24px,5vw,72px)] pb-[clamp(80px,12vh,130px)]">
+    <section id="pricing" class="relative z-2 mx-auto flex max-w-[1180px] flex-col gap-9 px-[clamp(24px,5vw,72px)] pb-[clamp(80px,12vh,130px)]">
       <div class="flex flex-col gap-3">
         <span data-reveal="fade" class="eyebrow text-text-faint">pricing</span>
         <h2 data-reveal="rise" class="m-0 font-display text-[clamp(2rem,1.4rem+3vw,3.6rem)] font-normal leading-[1.05] tracking-[-0.01em]">
@@ -239,7 +239,7 @@ const plans = [
         >
           <div class="flex items-baseline justify-between gap-3">
             <span class="text-[1.05rem] font-semibold">{{ pl.name }}</span>
-            <span class="font-mono text-[0.74rem] tracking-[0.1em] text-text-faint">{{ pl.tag }}</span>
+            <span class="font-mono text-[0.74rem] tracking-widest text-text-faint">{{ pl.tag }}</span>
           </div>
           <div class="flex items-baseline gap-2">
             <span class="font-display text-[2.6rem] font-normal leading-none">{{ pl.price }}</span>
@@ -251,7 +251,7 @@ const plans = [
                 class="h-[5px] w-[5px] shrink-0 -translate-y-0.5 rounded-full"
                 :style="{ background: pl.highlight ? 'oklch(0.82 0.10 205)' : 'var(--color-text-faint)' }"
               />
-              <span class="text-[0.92rem] leading-[1.5] text-text-dim">{{ f }}</span>
+              <span class="text-[0.92rem] leading-normal text-text-dim">{{ f }}</span>
             </div>
           </div>
           <NuxtLink
@@ -264,7 +264,7 @@ const plans = [
     </section>
 
     <!-- final CTA -->
-    <section class="relative z-[2] mx-auto flex max-w-[1180px] flex-col items-center gap-[26px] px-[clamp(24px,5vw,72px)] pb-[clamp(90px,14vh,150px)] text-center">
+    <section class="relative z-2 mx-auto flex max-w-[1180px] flex-col items-center gap-[26px] px-[clamp(24px,5vw,72px)] pb-[clamp(90px,14vh,150px)] text-center">
       <h2
         data-reveal="split"
         class="m-0 max-w-[16ch] font-display text-[clamp(2.2rem,1.5rem+4vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em]"
@@ -280,7 +280,7 @@ const plans = [
     </section>
 
     <!-- footer -->
-    <footer class="relative z-[2] mx-auto flex max-w-[1180px] items-center justify-between gap-4 border-t border-line-soft px-[clamp(24px,5vw,72px)] pt-7 pb-11">
+    <footer class="relative z-2 mx-auto flex max-w-[1180px] items-center justify-between gap-4 border-t border-line-soft px-[clamp(24px,5vw,72px)] pt-7 pb-11">
       <div class="flex flex-col gap-1.5">
         <span class="eyebrow text-text-faint">© 2026 vella</span>
         <span class="eyebrow text-text-faint">made in kuala lumpur</span>
