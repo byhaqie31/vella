@@ -26,6 +26,12 @@
   --color-warning: oklch(0.84 0.13 80);
   --color-danger: oklch(0.72 0.16 25);
 
+  /* dashboard chrome accent (blue/indigo) — the app shell only; published
+     portfolios still use the per-story accent system, not this. */
+  --color-brand: oklch(0.66 0.16 262);
+  --color-brand-strong: oklch(0.58 0.18 262);
+  --color-brand-bg: oklch(0.3 0.07 262);
+
   /* minimal theme (light "paper") */
   --color-paper: oklch(0.97 0.008 95);
   --color-paper-line: oklch(0.85 0.01 95);
@@ -91,4 +97,25 @@
 
 body {
   font-family: var(--font-sans);
+}
+
+/* Dashboard entrance — a quiet staggered rise for portal cards. Pair with an
+   inline animation-delay. Skipped entirely under reduced-motion. */
+@keyframes dash-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.dash-rise {
+  animation: dash-rise 0.45s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dash-rise {
+    animation: none;
+  }
 }

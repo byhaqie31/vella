@@ -34,7 +34,7 @@ const plans = [
     delay: 0,
     highlight: false,
     cta: 'Start free',
-    to: '/auth',
+    to: '/signup',
     features: ['One page, every theme', 'Your vella.page link', 'The full motion system', 'Small made-with-vella badge'],
   },
   {
@@ -83,9 +83,9 @@ const plans = [
       <div class="flex items-center gap-6">
         <a href="#themes" class="text-[0.92rem] text-text-dim no-underline transition-colors hover:text-text">Themes</a>
         <a href="#pricing" class="text-[0.92rem] text-text-dim no-underline transition-colors hover:text-text">Pricing</a>
-        <NuxtLink to="/auth" class="text-[0.92rem] text-text-dim no-underline transition-colors hover:text-text">Sign in</NuxtLink>
+        <NuxtLink to="/login" class="text-[0.92rem] text-text-dim no-underline transition-colors hover:text-text">Sign in</NuxtLink>
         <NuxtLink
-          to="/auth"
+          to="/signup"
           class="inline-flex items-center rounded-full border border-line px-[18px] py-[9px] text-[0.88rem] font-medium text-text no-underline transition-colors hover:border-text-faint"
         >Start free</NuxtLink>
       </div>
@@ -108,7 +108,7 @@ const plans = [
       </p>
       <div data-load="0.8" data-motion="rise-sm" class="flex items-center gap-4 pt-1.5">
         <NuxtLink
-          to="/auth"
+          to="/signup"
           data-magnetic
           class="bg-accent inline-flex items-center rounded-full px-7 py-3.5 text-[0.97rem] font-semibold text-ink no-underline shadow-[0_30px_80px_-30px_oklch(0_0_0/0.7)] transition-[filter] hover:brightness-110"
         >Start free</NuxtLink>

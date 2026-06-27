@@ -1,99 +1,75 @@
 <script setup lang="ts">
-import { samplePages } from '~/data/sample'
-import { THEMES, TYPE_MOODS } from '~/themes/registry'
-
 definePageMeta({ layout: 'studio' })
-useHead({ title: 'vella — your pages' })
+useHead({ title: 'Vella — home' })
 
-const cards = samplePages.map((p) => {
-  const theme = THEMES[p.story.themeKey]
-  const mood = TYPE_MOODS[p.story.typeMood]
-  const dark = theme.dark
-  return {
-    id: p.id,
-    name: p.story.identity.name,
-    slug: `vella.page/${p.slug}`,
-    published: p.story.isPublished,
-    views: p.story.isPublished ? p.views : '— views · 30d',
-    updated: p.updated,
-    themeLine: `${theme.key} · ${p.story.accent}`,
-    eyebrow: `${p.story.identity.name} · ${p.story.identity.role}`,
-    title: p.story.identity.headline,
-    preview: {
-      background: dark ? 'var(--color-ink-deep)' : 'var(--color-paper)',
-      color: dark ? 'var(--color-text)' : 'var(--color-paper-ink)',
-      dim: dark ? 'var(--color-text-faint)' : 'var(--color-paper-faint)',
-      line: dark ? 'var(--color-line)' : 'var(--color-paper-line)',
-      font: mood.font,
-      weight: mood.weight,
-    },
-  }
-})
+const { user } = useAuth()
+const { site, setup, setupDone, publicUrl, isPublished, publish } = useSite()
+
+const quickActions = [
+  { label: 'Add project', icon: 'plus', to: `/edit/${site.value.id}` },
+  { label: 'Switch template', icon: 'grid', to: '/dashboard/templates' },
+  { label: 'Connect domain', icon: 'globe', to: '/dashboard/domains' },
+]
 </script>
 
 <template>
-  <div class="flex max-w-[980px] flex-col gap-8">
-    <header class="flex flex-wrap items-end justify-between gap-6">
-      <div class="flex flex-col gap-2">
-        <h1 class="m-0 font-display text-[clamp(1.9rem,1.4rem+2vw,2.8rem)] font-normal leading-[1.05] tracking-[-0.01em]">Your pages</h1>
-        <p class="m-0 text-[0.95rem] text-text-dim">Two pages, one published. Edits go live the moment you publish.</p>
-      </div>
-      <NuxtLink
-        to="/edit/new"
-        class="bg-accent inline-flex items-center rounded-full px-[22px] py-[11px] text-[0.91rem] font-semibold text-ink no-underline transition-[filter] hover:brightness-110"
-      >New page</NuxtLink>
+  <div class="mx-auto flex max-w-[860px] flex-col gap-6">
+    <header class="dash-rise flex flex-col gap-1.5">
+      <h1 class="m-0 text-[clamp(1.55rem,1.2rem+1.6vw,2.1rem)] font-bold tracking-[-0.02em]">Welcome back, {{ user.name }}</h1>
+      <p class="m-0 text-[0.96rem] text-text-dim">
+        <template v-if="isPublished">Your site is live at <span class="text-text">{{ publicUrl }}</span>.</template>
+        <template v-else>Your site is in draft. Finish setup to go live.</template>
+      </p>
     </header>
 
-    <div class="grid gap-5" style="grid-template-columns: repeat(auto-fill, minmax(290px, 1fr))">
-      <article
-        v-for="pg in cards"
-        :key="pg.id"
-        class="flex flex-col overflow-hidden rounded-card border border-line-soft bg-ink-raised transition-colors duration-250 hover:border-line"
-      >
-        <div
-          class="flex min-h-[116px] flex-col gap-[9px] px-6 pt-[26px] pb-[30px]"
-          :style="{ background: pg.preview.background }"
-        >
-          <span class="font-mono text-[0.6rem] tracking-[0.16em]" :style="{ color: pg.preview.dim }">{{ pg.eyebrow }}</span>
-          <span
-            class="text-[1.55rem] leading-none tracking-[-0.02em]"
-            :style="{ fontFamily: pg.preview.font, fontWeight: pg.preview.weight, color: pg.preview.color }"
-          >{{ pg.title }}</span>
-          <div class="mt-[5px] h-px w-[52%]" :style="{ background: pg.preview.line }" />
-        </div>
-        <div class="flex flex-col gap-3 px-5 pt-4 pb-[18px]">
-          <div class="flex items-center justify-between gap-3">
-            <span class="text-[0.98rem] font-semibold">{{ pg.name }}</span>
-            <StatusPill :label="pg.published ? 'Published' : 'Draft'" :tone="pg.published ? 'positive' : 'warning'" />
-          </div>
-          <div class="flex items-center gap-3.5 font-mono text-[0.74rem] text-text-faint">
-            <span>{{ pg.slug }}</span>
-            <span class="ml-auto">{{ pg.views }}</span>
-          </div>
-          <div class="flex items-center gap-3.5 font-mono text-[0.74rem] text-text-faint">
-            <span>{{ pg.themeLine }}</span>
-            <span class="ml-auto">{{ pg.updated }}</span>
-          </div>
-          <div class="flex gap-2.5 pt-0.5">
-            <NuxtLink
-              :to="`/edit/${pg.id}`"
-              class="flex-1 rounded-field border border-line py-[9px] text-center text-[0.86rem] font-medium text-text no-underline transition-colors hover:border-text-faint hover:bg-ink-card"
-            >Edit</NuxtLink>
-            <NuxtLink
-              :to="`/${pg.id}`"
-              class="flex-1 rounded-field border border-line py-[9px] text-center text-[0.86rem] font-medium text-text no-underline transition-colors hover:border-text-faint hover:bg-ink-card"
-            >View</NuxtLink>
-          </div>
-        </div>
-      </article>
+    <div class="dash-rise" style="animation-delay: 60ms">
+      <DashboardSetupChecklist :steps="setup" :done="setupDone" />
+    </div>
 
-      <NuxtLink
-        to="/edit/new"
-        class="flex min-h-[280px] flex-col items-center justify-center gap-2.5 rounded-card border border-dashed border-line text-text-faint no-underline transition-colors duration-250 hover:border-text-faint hover:text-text"
-      >
-        <span class="text-[1.6rem] leading-none font-normal">+</span>
-        <span class="font-mono text-[0.78rem] tracking-[0.12em]">New page</span>
-      </NuxtLink>
+    <div class="dash-rise" style="animation-delay: 110ms">
+      <DashboardSiteCard :site="site" />
+    </div>
+
+    <div class="dash-rise grid grid-cols-2 gap-3.5 sm:grid-cols-3" style="animation-delay: 160ms">
+      <DashboardStatTile label="Views (7d)" :value="site.views7d" />
+      <DashboardStatTile label="Visitors (7d)" :value="site.visitors7d" />
+      <DashboardStatTile label="Status" :value="isPublished ? 'Live' : 'Not live'" :tone="isPublished ? 'positive' : 'warning'" />
+    </div>
+
+    <div class="dash-rise flex flex-col gap-4 rounded-card border border-line-soft bg-ink-raised p-6" style="animation-delay: 210ms">
+      <h2 class="m-0 text-[1.05rem] font-semibold">Quick actions</h2>
+      <div class="flex flex-wrap gap-2.5">
+        <NuxtLink
+          v-for="a in quickActions"
+          :key="a.label"
+          :to="a.to"
+          class="inline-flex items-center gap-2 rounded-field border border-line px-4 py-2.5 text-[0.88rem] font-medium text-text no-underline transition-colors hover:border-text-faint hover:bg-ink-card"
+        >
+          <DashboardIcon :name="a.icon" :size="16" /> {{ a.label }}
+        </NuxtLink>
+        <button
+          v-if="!isPublished"
+          type="button"
+          class="inline-flex cursor-pointer items-center gap-2 rounded-field border border-brand/40 bg-brand-bg px-4 py-2.5 text-[0.88rem] font-medium text-brand transition-[filter] hover:brightness-110"
+          @click="publish"
+        >
+          <DashboardIcon name="rocket" :size="16" /> Publish
+        </button>
+        <NuxtLink
+          v-else
+          :to="`/${site.handle}`"
+          target="_blank"
+          class="inline-flex items-center gap-2 rounded-field border border-brand/40 bg-brand-bg px-4 py-2.5 text-[0.88rem] font-medium text-brand no-underline transition-[filter] hover:brightness-110"
+        >
+          <DashboardIcon name="external" :size="16" /> View live
+        </NuxtLink>
+      </div>
+    </div>
+
+    <div class="dash-rise flex justify-center pt-1" style="animation-delay: 260ms">
+      <span class="grid h-9 w-9 place-items-center rounded-full border border-line-soft text-text-faint">
+        <DashboardIcon name="arrow-down" :size="16" />
+      </span>
     </div>
   </div>
 </template>

@@ -13,6 +13,7 @@ import type {
   TypeScale,
 } from '~/types/story'
 import { aliaStory, hurufStory } from '~/data/sample'
+import { PORTAL_SITE_ID, SITE_KEY } from '~/data/portal'
 import { defaultDesign, type Look, normalizeDesign, THEMES } from '~/themes/registry'
 
 const TAKEN_SLUGS = ['huruf', 'daniel-w', 'sofia-reads', 'admin', 'www']
@@ -66,9 +67,43 @@ export const useEditorStore = defineStore('editor', () => {
   let saveT2: ReturnType<typeof setTimeout> | undefined
   let slugT: ReturnType<typeof setTimeout> | undefined
 
+  /** Bridge to the portal's localStorage site so "Edit site" edits the real
+   *  content and saves persist back to the dashboard. Client-only; the server
+   *  falls through to the sample/blank story and the client re-loads on hydrate. */
+  function readPortalSite(): { story: StoryPage; handle: string } | null {
+    if (!import.meta.client) return null
+    try {
+      const raw = localStorage.getItem(SITE_KEY)
+      if (!raw) return null
+      const s = JSON.parse(raw)
+      return { story: s.story as StoryPage, handle: String(s.handle) }
+    } catch {
+      return null
+    }
+  }
+  function writePortalSite() {
+    if (!import.meta.client || pageId.value !== PORTAL_SITE_ID) return
+    try {
+      const raw = localStorage.getItem(SITE_KEY)
+      if (!raw) return
+      const s = JSON.parse(raw)
+      s.story = JSON.parse(JSON.stringify(story.value))
+      s.handle = slug.value
+      s.themeKey = story.value.themeKey
+      s.lastEditedAt = new Date().toISOString()
+      localStorage.setItem(SITE_KEY, JSON.stringify(s))
+    } catch {
+      // non-fatal for a mock
+    }
+  }
+
   function load(id: string) {
     pageId.value = id
-    if (id === 'huruf') {
+    const portal = id === PORTAL_SITE_ID ? readPortalSite() : null
+    if (portal) {
+      story.value = portal.story
+      slug.value = portal.handle
+    } else if (id === 'huruf') {
       story.value = structuredClone(hurufStory)
       slug.value = 'huruf'
     } else if (id === 'alia') {
@@ -90,6 +125,7 @@ export const useEditorStore = defineStore('editor', () => {
   /** Autosave indicator — stands in for the debounced PATCH until the API lands. */
   function touch() {
     savedState.value = 'saving'
+    writePortalSite()
     clearTimeout(saveT1)
     clearTimeout(saveT2)
     saveT1 = setTimeout(() => (savedState.value = 'saved'), 800)
