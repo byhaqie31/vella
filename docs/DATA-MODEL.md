@@ -27,8 +27,8 @@ interface StoryPage {
 
 The three top-level enums (`themeKey`, `accent`, `typeMood`) plus `design` are
 the customization surface; the rest is content. See
-[design-system.md](design-system.md) for how the design fields resolve to CSS,
-and [architecture.md](architecture.md) for how the document is rendered.
+[DESIGN-SYSTEM.md](DESIGN-SYSTEM.md) for how the design fields resolve to CSS,
+and [ARCHITECTURE.md](ARCHITECTURE.md) for how the document is rendered.
 
 ## `DesignConfig` — the bounded design layer
 
@@ -127,7 +127,7 @@ interface MotionPersonality {
 }
 ```
 
-See [motion.md](motion.md) for how `scaleMotion(personality, motionLevel)`
+See [MOTION.md](MOTION.md) for how `scaleMotion(personality, motionLevel)`
 combines the theme's temperament with the user's motion level.
 
 ## Persistence shape (today vs planned)

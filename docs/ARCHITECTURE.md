@@ -82,7 +82,7 @@ Every theme is a single `.vue` component that:
 - accepts exactly `defineProps<{ story: StoryPage }>()`,
 - renders a fixed spine: **identity/hero → ordered body sections → footer**,
 - reads the design layer and emits it as cascading CSS variables on its root,
-- annotates its markup with `data-*` motion attributes (see [motion.md](motion.md)),
+- annotates its markup with `data-*` motion attributes (see [MOTION.md](MOTION.md)),
 - satisfies the same section set: `about`, `chapters`, `gallery`, `links`.
 
 A theme **never** owns content and **never** invents new sections. It owns
@@ -120,7 +120,7 @@ const rootStyle = computed(() => ({
 Sizes and gaps are then written as `calc(... * var(--vella-type))` /
 `calc(... * var(--vella-space))`, so the whole page breathes with the user's
 choices and stays in proportion at any combination. See
-[design-system.md](design-system.md) for the full token and control catalog.
+[DESIGN-SYSTEM.md](DESIGN-SYSTEM.md) for the full token and control catalog.
 
 ## Routing
 

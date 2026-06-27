@@ -9,23 +9,25 @@ theme plus a few bounded design choices, and publishes a premium, animated
 personal page. **One content model, many themes** — switching theme re-renders
 the same story through a different design and motion personality.
 
-Deep docs live in [`docs/`](docs/) — read [`docs/architecture.md`](docs/architecture.md),
-[`docs/design-system.md`](docs/design-system.md), [`docs/motion.md`](docs/motion.md),
-and [`docs/data-model.md`](docs/data-model.md) before non-trivial work. This file
+Deep docs live in [`docs/`](docs/) — read [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md),
+[`docs/DESIGN-SYSTEM.md`](docs/DESIGN-SYSTEM.md), [`docs/MOTION.md`](docs/MOTION.md),
+and [`docs/DATA-MODEL.md`](docs/DATA-MODEL.md) before non-trivial work. This file
 is the short version.
 
 ## Reality check (read this first)
 
-The root `README.md` is **aspirational**. It describes a full backend (Drizzle,
-MySQL, zod, Billplz payments, R2 media, magic-link/Google auth, `@nuxt/ui`,
-`@nuxt/image`, Lenis, Docker/VPS). **None of that is installed or built.**
+What exists today is a **UI-complete frontend running entirely on in-memory
+sample data** ([`app/data/sample.ts`](app/data/sample.ts)). There is no
+`server/` directory, no database, no auth. In the editor store: `touch()`
+(autosave), `setSlug()` (availability), `logout()`, `togglePublish()`, and media
+"upload" are all **mocked** (timers / array pushes). Do not assume any API
+exists — when in doubt, check `package.json` and `app/`.
 
-What actually exists today: a **UI-complete frontend running entirely on
-in-memory sample data** ([`app/data/sample.ts`](app/data/sample.ts)). There is
-no `server/` directory, no database, no auth. In the editor store:
-`touch()` (autosave), `setSlug()` (availability), `logout()`, `togglePublish()`,
-and media "upload" are all **mocked** (timers / array pushes). Do not assume any
-API exists — when in doubt, check `package.json` and `app/`.
+The full intended backend (Drizzle, MySQL, zod, Billplz payments, R2 media,
+magic-link/Google auth, `@nuxt/ui`, `@nuxt/image`, Lenis, Docker/VPS) is
+**planned but not installed** — see the Roadmap in `README.md`. The root
+`README.md` and `docs/` describe this current-vs-planned line accurately; keep
+them in sync when the backend lands.
 
 ## Commands
 
@@ -94,9 +96,9 @@ chroma/lightness stay locked (`hueToPair`), so no hue can go ugly. A new control
 must still be a finite table in `registry.ts`, exposed in
 `EditorDesignPanel.vue`, consumed as a CSS var in both themes, with a store
 setter, and added to `defaultDesign`/`normalizeDesign`. See
-[`docs/design-system.md`](docs/design-system.md).
+[`docs/DESIGN-SYSTEM.md`](docs/DESIGN-SYSTEM.md).
 
-## Motion (see docs/motion.md)
+## Motion (see docs/MOTION.md)
 
 GSAP + ScrollTrigger + SplitText, client-only. Themes never call GSAP — they add
 attributes (`data-load`/`data-motion`, `data-reveal`, `data-parallax`,

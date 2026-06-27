@@ -7,19 +7,19 @@ picks a theme and a few bounded design choices, and publishes a premium,
 animated personal page. One content model, many themes — switching theme
 re-renders the same story through a different design and motion personality.
 
-This folder is the engineering source of truth. The product README at the repo
-root is written for a general audience and is partly **aspirational** — it
-describes the full intended stack (database, payments, media, auth). These docs
-describe **what is actually built today** and clearly mark what is planned.
+This folder is the engineering source of truth. The product `README.md` at the
+repo root covers the same current-vs-planned line for a general audience; these
+docs go deeper into how the built parts actually work. Both describe **what is
+actually built today** and clearly mark what is planned.
 
 ## Read in this order
 
 | doc | what it covers |
 |---|---|
-| [architecture.md](architecture.md) | the one-rule architecture (content/theme decoupling), folder map, routing, rendering pipeline, state, current state vs planned backend |
-| [design-system.md](design-system.md) | OKLCH tokens, the bounded design layer, accents, type moods, themes, looks, the "depth inside a fence" philosophy |
-| [motion.md](motion.md) | the data-attribute motion system, the four-layer model, load timeline, scroll reveals, motion personalities, the hard rules |
-| [data-model.md](data-model.md) | the `StoryPage` contract field by field — the spine the whole product hangs off |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | the one-rule architecture (content/theme decoupling), folder map, routing, rendering pipeline, state, current state vs planned backend |
+| [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md) | OKLCH tokens, the bounded design layer, accents, type moods, themes, looks, the "depth inside a fence" philosophy |
+| [MOTION.md](MOTION.md) | the data-attribute motion system, the four-layer model, load timeline, scroll reveals, motion personalities, the hard rules |
+| [DATA-MODEL.md](DATA-MODEL.md) | the `StoryPage` contract field by field — the spine the whole product hangs off |
 
 ## The thirty-second version
 
@@ -40,7 +40,7 @@ dashboard, editor with live preview, billing, account, admin — renders against
 the in-memory fixtures in [`app/data/sample.ts`](../app/data/sample.ts). The
 backend (persistence, auth, media, payments) is **not yet built**: slug checks
 and autosave are mocked timers in the Pinia store. See
-[architecture.md § Current state](architecture.md#current-state-vs-planned) for
+[ARCHITECTURE.md § Current state](ARCHITECTURE.md#current-state-vs-planned) for
 the exact line between real and stubbed.
 
 ## Stack at a glance
