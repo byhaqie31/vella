@@ -20,6 +20,7 @@ actually built today** and clearly mark what is planned.
 | [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md) | OKLCH tokens, the bounded design layer, accents, type moods, themes, looks, the "depth inside a fence" philosophy |
 | [MOTION.md](MOTION.md) | the data-attribute motion system, the four-layer model, load timeline, scroll reveals, motion personalities, the hard rules |
 | [DATA-MODEL.md](DATA-MODEL.md) | the `StoryPage` contract field by field — the spine the whole product hangs off |
+| [ONBOARDING.md](ONBOARDING.md) | the interview onboarding — three bounded steps, the deterministic draft engine, Look scoring, the staged reveal |
 
 ## The thirty-second version
 

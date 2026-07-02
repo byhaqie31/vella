@@ -130,8 +130,8 @@ root** (`/[slug]`), so user slugs share the namespace with real routes.
 - A **static route always wins** over the dynamic `[slug]`, so names like
   `dashboard`, `edit`, `admin`, `auth` can never be claimed by a user.
 - The editor store enforces this with a `RESERVED_SLUGS` list
-  (`admin, auth, dashboard, edit, www, api, u`) in addition to
-  `TAKEN_SLUGS` (already-registered handles).
+  (`admin, auth, dashboard, dev, edit, login, onboarding, signup, www, api, u`)
+  in addition to `TAKEN_SLUGS` (already-registered handles).
 
 | route | file | layout | purpose |
 |---|---|---|---|

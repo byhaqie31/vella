@@ -19,7 +19,7 @@ import { defaultDesign, type Look, normalizeDesign, THEMES } from '~/themes/regi
 const TAKEN_SLUGS = ['huruf', 'daniel-w', 'sofia-reads', 'admin', 'www']
 // Slugs live at the root (/[slug]), so they share the namespace with real
 // routes — a static route always wins, so these names can't be claimed.
-const RESERVED_SLUGS = ['admin', 'auth', 'dashboard', 'dev', 'edit', 'www', 'api', 'u']
+const RESERVED_SLUGS = ['admin', 'auth', 'dashboard', 'dev', 'edit', 'login', 'onboarding', 'signup', 'www', 'api', 'u']
 
 export type SavedState = 'idle' | 'saving' | 'saved'
 export type SlugState = 'yours' | 'checking' | 'taken' | 'available' | 'empty'
