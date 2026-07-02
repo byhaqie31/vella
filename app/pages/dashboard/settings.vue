@@ -7,6 +7,7 @@ const { site, publicUrl, setHandle } = useSite()
 
 const name = ref(user.value.name)
 const email = ref(user.value.email)
+const phone = ref(user.value.phone ?? '')
 const saved = ref(false)
 let savedT: ReturnType<typeof setTimeout> | undefined
 
@@ -15,6 +16,7 @@ function save() {
     ...user.value,
     name: name.value.trim() || user.value.name,
     email: email.value.trim(),
+    phone: phone.value.trim(),
     initial: (name.value.trim()[0] ?? user.value.initial).toUpperCase(),
   }
   saved.value = true
@@ -61,6 +63,11 @@ const fieldCls =
           <span class="text-[0.8rem] text-text-dim">Email</span>
           <input v-model="email" :class="fieldCls" @input="saved = false">
           <span class="font-mono text-[0.7rem] text-text-faint">Changing email sends a confirmation link to the new address</span>
+        </label>
+        <label class="flex flex-col gap-1.5">
+          <span class="text-[0.8rem] text-text-dim">Mobile number</span>
+          <input v-model="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+60 12 345 6789" :class="fieldCls" @input="saved = false">
+          <span class="font-mono text-[0.7rem] text-text-faint">Used for account notifications and recovery</span>
         </label>
         <label class="flex flex-col gap-1.5">
           <span class="text-[0.8rem] text-text-dim">Public address</span>

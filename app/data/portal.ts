@@ -18,6 +18,8 @@ export const DOMAINS_KEY = 'vella:domains'
 export interface PortalUser {
   name: string
   email: string
+  /** Mobile number for account notifications and recovery. Empty until set. */
+  phone: string
   plan: 'free' | 'pro'
   initial: string
 }
@@ -81,6 +83,7 @@ export const TEMPLATES: Template[] = LOOKS.map((l) => {
 export const defaultUser: PortalUser = {
   name: 'Qie',
   email: 'qie@axelnova.dev',
+  phone: '',
   plan: 'free',
   initial: 'Q',
 }
